@@ -1,0 +1,7 @@
+Mon Apr 12 18:53:21 MSK 2004
+
+Changes to version 0.0.1
+------------------------
+
+- Basic SNMP MIBs compiled (with smidump).
+
