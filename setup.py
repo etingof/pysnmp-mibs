@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name="pysnmp-mibs",
-      version="0.0.1",
+      version="0.0.1-alpha-0",
       description="A collection of SNMP MIBs for PySNMP toolkit",
       author="Ilya Etingof",
       author_email="ilya@glas.net ",
