@@ -1,7 +1,8 @@
-Mon Apr 12 18:53:21 MSK 2004
+Mon Nov  15 08:11:59 MSD 2004
 
-Changes to version 0.0.1
-------------------------
+Changes to version 0.0.1a
+-------------------------
 
-- Basic SNMP MIBs compiled (with smidump).
+- UNSTABLE EARLY ALPHA RELEASE.
+- Some IETF MIBs compiled into pysnmp SMI modules.
 
