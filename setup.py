@@ -8,5 +8,5 @@ setup(name="pysnmp-mibs",
       author="Ilya Etingof",
       author_email="ilya@glas.net ",
       url="http://sourceforge.net/projects/pysnmp/",
-      packages = [ 'pysnmp_mibs' ],
+      packages = [ 'pysnmp_mibs', 'pysnmp_mibs.v4' ],
       license="BSD")

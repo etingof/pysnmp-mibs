@@ -5,4 +5,3 @@ Changes to version 0.0.1a
 
 - UNSTABLE EARLY ALPHA RELEASE.
 - Some IETF MIBs compiled into pysnmp SMI modules.
-
