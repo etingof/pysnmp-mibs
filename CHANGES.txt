@@ -1,15 +1,12 @@
-Tue Jun 28 21:11:17 MSD 2005
+Release 0.0.2a
+--------------
 
-Changes to version 0.0.2a
--------------------------
-
+- UNSTABLE ALPHA RELEASE
 - MIB modules re-generated from text source with newer tools
 - SMIv1 modules dropped
 
-Mon Nov  15 08:11:59 MSD 2004
+Release 0.0.1a
+--------------
 
-Changes to version 0.0.1a
--------------------------
-
-- UNSTABLE EARLY ALPHA RELEASE.
-- Some IETF MIBs compiled into pysnmp SMI modules.
+- UNSTABLE EARLY ALPHA RELEASE
+- Some IETF MIBs compiled into pysnmp SMI modules
