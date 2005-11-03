@@ -1,3 +1,12 @@
+Release 0.0.3a
+--------------
+
+- UNSTABLE ALPHA RELEASE
+- MIB modules re-generated from text source with newer tools
+- RFC1213-MIB moved to base MIBs in pysnmp package because
+  smidump does not translate NetworkAddress of SMIv1 into SMIv2
+  properly.
+
 Release 0.0.2a
 --------------
 
