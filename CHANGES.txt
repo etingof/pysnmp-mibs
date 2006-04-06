@@ -4,6 +4,7 @@ Release 0.0.4a
 - UNSTABLE ALPHA RELEASE
 - tools/rebuild-pysnmp-mibs shell script implemented aimed
   at pysnmp MIB modules re-build automation
+- NET-SNMP-* MIBs added
 - MIB modules re-generated from text source with newer tools
 
 Release 0.0.3a
