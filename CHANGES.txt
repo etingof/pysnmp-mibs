@@ -1,3 +1,10 @@
+Release 0.0.5a
+--------------
+
+- UNSTABLE ALPHA RELEASE
+- MIB modules re-generated from text source with fixed libsmi2pysnmp
+  tool (0.0.7a)
+
 Release 0.0.4a
 --------------
 
