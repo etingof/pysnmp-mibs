@@ -1,3 +1,10 @@
+Release 0.0.6a
+--------------
+
+- MIB modules re-generated from text source with improved smidump and
+  libsmi2pysnmp tools. Python code now includes huge text fields from
+  MIB text.
+
 Release 0.0.5a
 --------------
 
