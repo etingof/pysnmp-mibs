@@ -3,11 +3,11 @@
 from distutils.core import setup
 
 setup(name="pysnmp-mibs",
-      version="0.0.7a",
+      version="0.0.8a",
       description="A collection of pre-compiled SNMP MIBs for PySNMP",
       author="Ilya Etingof",
       author_email="ilya@glas.net ",
       url="http://sourceforge.net/projects/pysnmp/",
-      packages = [ 'pysnmp_mibs', 'pysnmp_mibs.v4' ],
+      packages = [ 'pysnmp_mibs' ],
       scripts = [ 'tools/rebuild-pysnmp-mibs' ],
       license="BSD")

@@ -1,3 +1,8 @@
+Release 0.0.8a
+--------------
+
+- API versioning mechanics retired (pysnmp_mibs.v4 -> pysnmp_mibs).
+
 Release 0.0.7a
 --------------
 
