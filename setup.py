@@ -19,7 +19,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(name = 'pysnmp-mibs',
-      version = '0.0.8a',
+      version = '0.0.9a',
       description = 'A collection of pre-compiled PySNMP MIBs',
       author = 'Ilya Etingof',
       author_email = 'ilya@glas.net',
