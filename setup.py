@@ -18,12 +18,13 @@ except ImportError:
             sys.exit(1)
     from distutils.core import setup
 
-setup(name="pysnmp-mibs",
-      version="0.0.8a",
-      description="A collection of pre-compiled SNMP MIBs for PySNMP",
-      author="Ilya Etingof",
-      author_email="ilya@glas.net ",
-      url="http://sourceforge.net/projects/pysnmp/",
+setup(name = 'pysnmp-mibs',
+      version = '0.0.8a',
+      description = 'A collection of pre-compiled PySNMP MIBs',
+      author = 'Ilya Etingof',
+      author_email = 'ilya@glas.net',
+      url = 'http://sourceforge.net/projects/pysnmp/',
+      license = 'BSD',
+      requires = [ 'pysnmp' ],
       packages = [ 'pysnmp_mibs' ],
-      scripts = [ 'tools/rebuild-pysnmp-mibs' ],
-      license="BSD")
+      scripts = [ 'tools/rebuild-pysnmp-mibs' ])
