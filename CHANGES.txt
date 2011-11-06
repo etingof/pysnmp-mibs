@@ -1,5 +1,9 @@
-Release 0.0.10a
----------------
+Release 0.1.1
+-------------
+
+- MIB modules re-generated from text source with Python 3 and updated,
+  Py3k-compliant, libsmi2pysnmp tool.
+- Some new MIBs added.
 
 Release 0.0.9a
 --------------
