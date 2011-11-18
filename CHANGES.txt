@@ -1,3 +1,8 @@
+Release 0.1.2
+-------------
+
+- Missing dependency fixed.
+
 Release 0.1.1
 -------------
 

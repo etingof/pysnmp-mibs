@@ -12,7 +12,7 @@ It's very easy to install it, just type (as root on Linux):
 try:
     from setuptools import setup
     params = {
-        'install_requires': [ 'pysnmp>=4.2.1' ],
+        'install_requires': [ 'pysnmp>=4.2.1', 'pyasn1>=0.1.1' ],
         'zip_safe': True
         }
 except ImportError:
@@ -22,12 +22,12 @@ except ImportError:
             sys.exit(1)
     from distutils.core import setup
     params = {
-        'requires': [ 'pysnmp(>=4.2.1)' ]
+        'requires': [ 'pysnmp(>=4.2.1)', 'pyasn1(>=0.1.1)' ]
         }
 
 params.update( {
     'name': 'pysnmp-mibs',
-    'version': '0.1.1',
+    'version': '0.1.2',
     'description': 'A collection of IETF & IANA MIBs pre-compiled for PySNMP',
     'author': 'Ilya Etingof',
     'author_email': 'ilya@glas.net',
