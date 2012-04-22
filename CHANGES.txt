@@ -1,3 +1,8 @@
+Release 0.1.4
+-------------
+
+- UCD-SNMP-MIB added
+
 Release 0.1.3
 -------------
 

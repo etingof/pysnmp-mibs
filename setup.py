@@ -27,7 +27,7 @@ except ImportError:
 
 params.update( {
     'name': 'pysnmp-mibs',
-    'version': '0.1.3',
+    'version': '0.1.4',
     'description': 'A collection of IETF & IANA MIBs pre-compiled for PySNMP',
     'author': 'Ilya Etingof',
     'author_email': 'ilya@glas.net',
