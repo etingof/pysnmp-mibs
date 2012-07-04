@@ -3,6 +3,7 @@ Release 0.1.4
 
 - UCD-SNMP-MIB added
 - Package meta-information updated.
+- Package version is now in __init__.__version__
 
 Release 0.1.3
 -------------

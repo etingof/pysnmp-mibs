@@ -51,7 +51,7 @@ doclines = [ x.strip() for x in __doc__.split('\n') if x ]
 
 params.update( {
     'name': 'pysnmp-mibs',
-    'version': '0.1.4',
+    'version': open('pysnmp_mibs/__init__.py').read().split('\'')[1],
     'description': doclines[0],
     'long_description': ' '.join(doclines[1:]),
     'maintainer': 'Ilya Etingof <ilya@glas.net>',
