@@ -3,6 +3,8 @@
 
    A collection of IETF & IANA MIBs compiled into PySNMP classes.
 """
+import sys
+
 classifiers = """\
 Development Status :: 5 - Production/Stable
 Environment :: Console
