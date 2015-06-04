@@ -72,8 +72,7 @@ params.update( {
     'classifiers': [ x for x in classifiers.split('\n') if x ],
     'platforms': ['any'],
     'license': 'BSD',
-    'packages': [ 'pysnmp_mibs' ],
-    'scripts': [ 'tools/rebuild-pysnmp-mibs' ]
+    'packages': [ 'pysnmp_mibs' ]
     } )
                
 setup(**params)
