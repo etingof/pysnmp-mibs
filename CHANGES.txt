@@ -5,6 +5,7 @@ Release 0.1.5
   (http://opensource.org/licenses/BSD-2-Clause).
 - Distribute is gone, switched to setuptools completely.
 - The rebuild-pysnmp-mibs tool is gone. PySMI is way better.
+- All MIBs rebuilt with PySMI.
 
 Release 0.1.4
 -------------
