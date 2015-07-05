@@ -1,1 +1,1 @@
-include CHANGES README LICENSE
+include *.txt
