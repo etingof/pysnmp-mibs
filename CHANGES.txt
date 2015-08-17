@@ -6,6 +6,7 @@ Release 0.1.5
 - Distribute is gone, switched to setuptools completely.
 - The rebuild-pysnmp-mibs tool is gone. PySMI is way better.
 - All MIBs rebuilt with PySMI.
+- Wheel distribution format now supported.
 
 Release 0.1.4
 -------------
