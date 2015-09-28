@@ -1,5 +1,5 @@
-Release 0.1.5
--------------
+Revision 0.1.5, released 28-09-2015
+-----------------------------------
 
 - License updated to vanilla BSD 2-Clause to ease package use
   (http://opensource.org/licenses/BSD-2-Clause).
@@ -8,66 +8,66 @@ Release 0.1.5
 - All MIBs rebuilt with PySMI.
 - Wheel distribution format now supported.
 
-Release 0.1.4
--------------
+Revision 0.1.4, released 30-01-2013
+-----------------------------------
 
 - UCD-SNMP-MIB added.
 - Some of SMIv1 MIB modules added.
 - Package meta-information updated.
 - Package version is now in __init__.__version__
 
-Release 0.1.3
--------------
+Revision 0.1.3, released 04-07-2012
+-----------------------------------
 
 - MIB modules re-generated with the latest libsmi2pysnmp to get in-sync
   with the changed pysnmp core MIB set.
 - Explicit pyasn1 dependency now obsolete.
 
-Release 0.1.2
--------------
+Revision 0.1.2, released 18-11-2011
+-----------------------------------
 
 - Missing dependency fixed.
 
-Release 0.1.1
--------------
+Revision 0.1.1, released 06-11-2011
+-----------------------------------
 
 - MIB modules re-generated from text source with Python 3 and updated,
   Py3k-compliant, libsmi2pysnmp tool.
 - Some new MIBs added.
 
-Release 0.0.9a
---------------
+Revision 0.0.9a
+---------------
 
 - Some more IETF MIBs added.
 
-Release 0.0.8a
---------------
+Revision 0.0.8a
+---------------
 
 - API versioning mechanics retired (pysnmp_mibs.v4 -> pysnmp_mibs).
 - Attempt to use setuptools for package management whenever available.
 
-Release 0.0.7a
---------------
+Revision 0.0.7a
+---------------
 
 - MIB modules re-generated from latest text source with improved slightly
   fixed libsmi2pysnmp tool.
 
-Release 0.0.6a
---------------
+Revision 0.0.6a
+---------------
 
 - MIB modules re-generated from text source with improved smidump and
   libsmi2pysnmp tools. Python code now includes huge text fields from
   MIB text.
 
-Release 0.0.5a
---------------
+Revision 0.0.5a
+---------------
 
 - UNSTABLE ALPHA RELEASE
 - MIB modules re-generated from text source with fixed libsmi2pysnmp
   tool (0.0.7a)
 
-Release 0.0.4a
---------------
+Revision 0.0.4a
+---------------
 
 - UNSTABLE ALPHA RELEASE
 - tools/rebuild-pysnmp-mibs shell script implemented aimed
@@ -75,8 +75,8 @@ Release 0.0.4a
 - NET-SNMP-* MIBs added
 - MIB modules re-generated from text source with newer tools
 
-Release 0.0.3a
---------------
+Revision 0.0.3a
+---------------
 
 - UNSTABLE ALPHA RELEASE
 - MIB modules re-generated from text source with newer tools
@@ -84,15 +84,15 @@ Release 0.0.3a
   smidump does not translate NetworkAddress of SMIv1 into SMIv2
   properly.
 
-Release 0.0.2a
---------------
+Revision 0.0.2a
+---------------
 
 - UNSTABLE ALPHA RELEASE
 - MIB modules re-generated from text source with newer tools
 - SMIv1 modules dropped
 
-Release 0.0.1a
---------------
+Revision 0.0.1a
+---------------
 
 - UNSTABLE EARLY ALPHA RELEASE
 - Some IETF MIBs compiled into pysnmp SMI modules
