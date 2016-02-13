@@ -1,23 +1,24 @@
 #
 # PySNMP MIB module CIRCUIT-IF-MIB (http://pysnmp.sf.net)
 # ASN.1 source http://mibs.snmplabs.com:80/asn1/CIRCUIT-IF-MIB
-# Produced by pysmi-0.0.3 at Wed Jul  1 22:26:30 2015
-# On host cray platform Linux version 2.6.37.6-smp by user ilya
-# Using Python version 2.7.2 (default, Apr  2 2012, 20:32:47) 
+# Produced by pysmi-0.0.7 at Sun Feb 14 00:06:52 2016
+# On host bldfarm platform Linux version 4.1.13-100.fc21.x86_64 by user goose
+# Using Python version 3.5.0 (default, Jan  5 2016, 17:11:52) 
 #
-( Integer, ObjectIdentifier, OctetString, ) = mibBuilder.importSymbols("ASN1", "Integer", "ObjectIdentifier", "OctetString")
+( ObjectIdentifier, Integer, OctetString, ) = mibBuilder.importSymbols("ASN1", "ObjectIdentifier", "Integer", "OctetString")
 ( NamedValues, ) = mibBuilder.importSymbols("ASN1-ENUMERATION", "NamedValues")
-( ConstraintsUnion, SingleValueConstraint, ConstraintsIntersection, ValueSizeConstraint, ValueRangeConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "SingleValueConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "ValueRangeConstraint")
-( ifIndex, InterfaceIndex, ) = mibBuilder.importSymbols("IF-MIB", "ifIndex", "InterfaceIndex")
-( NotificationGroup, ModuleCompliance, ObjectGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ModuleCompliance", "ObjectGroup")
-( Integer32, MibScalar, MibTable, MibTableRow, MibTableColumn, NotificationType, MibIdentifier, mib_2, IpAddress, TimeTicks, Counter64, Unsigned32, iso, Gauge32, ModuleIdentity, ObjectIdentity, Bits, Counter32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Integer32", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "NotificationType", "MibIdentifier", "mib-2", "IpAddress", "TimeTicks", "Counter64", "Unsigned32", "iso", "Gauge32", "ModuleIdentity", "ObjectIdentity", "Bits", "Counter32")
-( TextualConvention, StorageType, TimeStamp, RowStatus, DisplayString, RowPointer, ) = mibBuilder.importSymbols("SNMPv2-TC", "TextualConvention", "StorageType", "TimeStamp", "RowStatus", "DisplayString", "RowPointer")
+( ConstraintsUnion, ConstraintsIntersection, ValueRangeConstraint, ValueSizeConstraint, SingleValueConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "ConstraintsIntersection", "ValueRangeConstraint", "ValueSizeConstraint", "SingleValueConstraint")
+( InterfaceIndex, ifIndex, ) = mibBuilder.importSymbols("IF-MIB", "InterfaceIndex", "ifIndex")
+( NotificationGroup, ObjectGroup, ModuleCompliance, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ObjectGroup", "ModuleCompliance")
+( TimeTicks, MibScalar, MibTable, MibTableRow, MibTableColumn, Integer32, iso, NotificationType, MibIdentifier, Counter64, Bits, ModuleIdentity, Counter32, mib_2, ObjectIdentity, IpAddress, Unsigned32, Gauge32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "TimeTicks", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "Integer32", "iso", "NotificationType", "MibIdentifier", "Counter64", "Bits", "ModuleIdentity", "Counter32", "mib-2", "ObjectIdentity", "IpAddress", "Unsigned32", "Gauge32")
+( RowPointer, TextualConvention, DisplayString, StorageType, RowStatus, TimeStamp, ) = mibBuilder.importSymbols("SNMPv2-TC", "RowPointer", "TextualConvention", "DisplayString", "StorageType", "RowStatus", "TimeStamp")
 circuitIfMIB = ModuleIdentity((1, 3, 6, 1, 2, 1, 94)).setRevisions(("2002-01-03 00:00",))
+if mibBuilder.loadTexts: circuitIfMIB.setLastUpdated('200201030000Z')
 if mibBuilder.loadTexts: circuitIfMIB.setOrganization('IETF Frame Relay Service MIB Working Group')
 if mibBuilder.loadTexts: circuitIfMIB.setContactInfo('IETF Frame Relay Service MIB (frnetmib) Working Group\n\n           WG Charter:    http://www.ietf.org/html.charters/\n                                 frnetmib-charter.html\n           WG-email:      frnetmib@sunroof.eng.sun.com\n           Subscribe:     frnetmib-request@sunroof.eng.sun.com\n           Email Archive: ftp://ftp.ietf.org/ietf-mail-archive/frnetmib\n\n           Chair:      Andy Malis\n                       Vivace Networks\n           Email:      Andy.Malis@vivacenetworks.com\n\n           WG editor:  Robert Steinberger\n                       Paradyne Networks and\n                       Fujitsu Network Communications\n           Email:      robert.steinberger@fnc.fujitsu.com\n\n           Co-author:  Orly Nicklass\n                       RAD Data Communications Ltd.\n           EMail:      Orly_n@rad.co.il')
 if mibBuilder.loadTexts: circuitIfMIB.setDescription('The MIB module to allow insertion of selected circuit into\n             the ifTable.')
 class CiFlowDirection(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3,))
     namedValues = NamedValues(("transmit", 1), ("receive", 2), ("both", 3),)
 
 ciObjects = MibIdentifier((1, 3, 6, 1, 2, 1, 94, 1))
@@ -41,7 +42,7 @@ ciCircuitStorageType = MibTableColumn((1, 3, 6, 1, 2, 1, 94, 1, 1, 1, 6), Storag
 if mibBuilder.loadTexts: ciCircuitStorageType.setDescription('The storage type used for this row.')
 ciIfMapTable = MibTable((1, 3, 6, 1, 2, 1, 94, 1, 2), )
 if mibBuilder.loadTexts: ciIfMapTable.setDescription('The Circuit Interface Map Table.')
-ciIfMapEntry = MibTableRow((1, 3, 6, 1, 2, 1, 94, 1, 2, 1), ).setIndexNames((0, "CIRCUIT-IF-MIB", "ifIndex"))
+ciIfMapEntry = MibTableRow((1, 3, 6, 1, 2, 1, 94, 1, 2, 1), ).setIndexNames((0, "IF-MIB", "ifIndex"))
 if mibBuilder.loadTexts: ciIfMapEntry.setDescription('An entry in the Circuit Interface Map Table.')
 ciIfMapObject = MibTableColumn((1, 3, 6, 1, 2, 1, 94, 1, 2, 1, 1), RowPointer()).setMaxAccess("readonly")
 if mibBuilder.loadTexts: ciIfMapObject.setDescription('This value contains the value of RowPointer that\n             corresponds to the current ifIndex.')
@@ -61,4 +62,4 @@ ciIfMapGroup = ObjectGroup((1, 3, 6, 1, 2, 1, 94, 3, 1, 2)).setObjects(*(("CIRCU
 if mibBuilder.loadTexts: ciIfMapGroup.setDescription('A collection of required objects providing\n            information from the interface map table.')
 ciStatsGroup = ObjectGroup((1, 3, 6, 1, 2, 1, 94, 3, 1, 3)).setObjects(*(("CIRCUIT-IF-MIB", "ciIfLastChange"), ("CIRCUIT-IF-MIB", "ciIfNumActive"),))
 if mibBuilder.loadTexts: ciStatsGroup.setDescription('A collection of statistical metrics used to help manage\n            the ciCircuitTable.')
-mibBuilder.exportSymbols("CIRCUIT-IF-MIB", ciObjects=ciObjects, ciConformance=ciConformance, ciCircuitStatus=ciCircuitStatus, PYSNMP_MODULE_ID=circuitIfMIB, ciCircuitGroup=ciCircuitGroup, ciCircuitCreateTime=ciCircuitCreateTime, ciMIBCompliances=ciMIBCompliances, ciIfNumActive=ciIfNumActive, ciCompliance=ciCompliance, ciStatsGroup=ciStatsGroup, ciCapabilities=ciCapabilities, ciIfMapTable=ciIfMapTable, CiFlowDirection=CiFlowDirection, ciIfMapGroup=ciIfMapGroup, ciIfLastChange=ciIfLastChange, ciCircuitObject=ciCircuitObject, ciCircuitIfIndex=ciCircuitIfIndex, ciCircuitEntry=ciCircuitEntry, ciCircuitFlow=ciCircuitFlow, ciIfMapEntry=ciIfMapEntry, circuitIfMIB=circuitIfMIB, ciCircuitTable=ciCircuitTable, ciCircuitStorageType=ciCircuitStorageType, ciIfMapFlow=ciIfMapFlow, ciIfMapObject=ciIfMapObject, ciMIBGroups=ciMIBGroups)
+mibBuilder.exportSymbols("CIRCUIT-IF-MIB", ciCircuitStorageType=ciCircuitStorageType, ciIfLastChange=ciIfLastChange, ciCircuitTable=ciCircuitTable, ciIfNumActive=ciIfNumActive, ciCircuitIfIndex=ciCircuitIfIndex, ciCircuitEntry=ciCircuitEntry, ciCapabilities=ciCapabilities, circuitIfMIB=circuitIfMIB, ciMIBCompliances=ciMIBCompliances, ciIfMapGroup=ciIfMapGroup, ciCircuitCreateTime=ciCircuitCreateTime, ciIfMapEntry=ciIfMapEntry, ciStatsGroup=ciStatsGroup, ciIfMapTable=ciIfMapTable, ciCircuitObject=ciCircuitObject, ciCircuitFlow=ciCircuitFlow, CiFlowDirection=CiFlowDirection, ciConformance=ciConformance, ciIfMapObject=ciIfMapObject, ciCircuitGroup=ciCircuitGroup, ciIfMapFlow=ciIfMapFlow, ciCompliance=ciCompliance, ciMIBGroups=ciMIBGroups, ciObjects=ciObjects, ciCircuitStatus=ciCircuitStatus, PYSNMP_MODULE_ID=circuitIfMIB)

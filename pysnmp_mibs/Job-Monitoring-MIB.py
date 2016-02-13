@@ -1,17 +1,18 @@
 #
 # PySNMP MIB module Job-Monitoring-MIB (http://pysnmp.sf.net)
 # ASN.1 source http://mibs.snmplabs.com:80/asn1/Job-Monitoring-MIB
-# Produced by pysmi-0.0.3 at Wed Jul  1 22:29:47 2015
-# On host cray platform Linux version 2.6.37.6-smp by user ilya
-# Using Python version 2.7.2 (default, Apr  2 2012, 20:32:47) 
+# Produced by pysmi-0.0.7 at Sun Feb 14 00:19:35 2016
+# On host bldfarm platform Linux version 4.1.13-100.fc21.x86_64 by user goose
+# Using Python version 3.5.0 (default, Jan  5 2016, 17:11:52) 
 #
-( Integer, ObjectIdentifier, OctetString, ) = mibBuilder.importSymbols("ASN1", "Integer", "ObjectIdentifier", "OctetString")
+( ObjectIdentifier, Integer, OctetString, ) = mibBuilder.importSymbols("ASN1", "ObjectIdentifier", "Integer", "OctetString")
 ( NamedValues, ) = mibBuilder.importSymbols("ASN1-ENUMERATION", "NamedValues")
-( ConstraintsUnion, SingleValueConstraint, ConstraintsIntersection, ValueSizeConstraint, ValueRangeConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "SingleValueConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "ValueRangeConstraint")
-( NotificationGroup, ModuleCompliance, ObjectGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ModuleCompliance", "ObjectGroup")
-( Integer32, MibScalar, MibTable, MibTableRow, MibTableColumn, NotificationType, MibIdentifier, IpAddress, TimeTicks, Counter64, Unsigned32, enterprises, ModuleIdentity, Gauge32, iso, ObjectIdentity, Bits, Counter32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Integer32", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "NotificationType", "MibIdentifier", "IpAddress", "TimeTicks", "Counter64", "Unsigned32", "enterprises", "ModuleIdentity", "Gauge32", "iso", "ObjectIdentity", "Bits", "Counter32")
+( ConstraintsIntersection, ValueRangeConstraint, SingleValueConstraint, ValueSizeConstraint, ConstraintsUnion, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsIntersection", "ValueRangeConstraint", "SingleValueConstraint", "ValueSizeConstraint", "ConstraintsUnion")
+( ModuleCompliance, ObjectGroup, NotificationGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "ModuleCompliance", "ObjectGroup", "NotificationGroup")
+( NotificationType, Bits, Counter64, Gauge32, Unsigned32, Counter32, TimeTicks, MibScalar, MibTable, MibTableRow, MibTableColumn, IpAddress, iso, MibIdentifier, Integer32, ModuleIdentity, ObjectIdentity, enterprises, ) = mibBuilder.importSymbols("SNMPv2-SMI", "NotificationType", "Bits", "Counter64", "Gauge32", "Unsigned32", "Counter32", "TimeTicks", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "IpAddress", "iso", "MibIdentifier", "Integer32", "ModuleIdentity", "ObjectIdentity", "enterprises")
 ( DisplayString, TextualConvention, ) = mibBuilder.importSymbols("SNMPv2-TC", "DisplayString", "TextualConvention")
 jobmonMIB = ModuleIdentity((1, 3, 6, 1, 4, 1, 2699, 1, 1)).setRevisions(("1999-02-19 00:00",))
+if mibBuilder.loadTexts: jobmonMIB.setLastUpdated('9902190000Z')
 if mibBuilder.loadTexts: jobmonMIB.setOrganization('Printer Working Group (PWG)')
 if mibBuilder.loadTexts: jobmonMIB.setContactInfo("Tom Hastings\n        Postal:  Xerox Corp.\n                 Mail stop ESAE-231\n                 701 S. Aviation Blvd.\n                 El Segundo, CA 90245\n\n        Tel:     (301)333-6413\n        Fax:     (301)333-5514\n        E-mail:  hastings@cp10.es.xerox.com\n\n        Send questions and comments to the Printer Working Group (PWG)\n        using the Job Monitoring Project (JMP) Mailing List:\n        jmp@pwg.org\n\n        For further information, including how to subscribe to the\n        jmp mailing list, access the PWG web page under 'JMP':\n\n            http://www.pwg.org/\n\n        Implementers of this specification are encouraged to join the\n        jmp mailing list in order to participate in discussions on any\n        clarifications needed and registration proposals being reviewed\n\n        in order to achieve consensus.")
 if mibBuilder.loadTexts: jobmonMIB.setDescription('The MIB module for monitoring job in servers, printers, and\n        other devices.\n\n        Version: 1.0')
@@ -29,15 +30,15 @@ class JmTimeStampTC(Integer32, TextualConvention):
     subtypeSpec = Integer32.subtypeSpec+ValueRangeConstraint(0,2147483647)
 
 class JmJobSourcePlatformTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("sptUNIX", 3), ("sptOS2", 4), ("sptPCDOS", 5), ("sptNT", 6), ("sptMVS", 7), ("sptVM", 8), ("sptOS400", 9), ("sptVMS", 10), ("sptWindows", 11), ("sptNetWare", 12),)
 
 class JmFinishingTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4, 5, 6, 7,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4, 5, 6, 7,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("none", 3), ("staple", 4), ("punch", 5), ("cover", 6), ("bind", 7),)
 
 class JmPrintQualityTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4, 5,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4, 5,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("draft", 3), ("normal", 4), ("high", 5),)
 
 class JmPrinterResolutionTC(OctetString, TextualConvention):
@@ -45,19 +46,19 @@ class JmPrinterResolutionTC(OctetString, TextualConvention):
     fixedLength = 9
 
 class JmTonerEconomyTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(2, 3, 4,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(2, 3, 4,))
     namedValues = NamedValues(("unknown", 2), ("off", 3), ("on", 4),)
 
 class JmBooleanTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(2, 3, 4,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(2, 3, 4,))
     namedValues = NamedValues(("unknown", 2), ("false", 3), ("true", 4),)
 
 class JmMediumTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("stationery", 3), ("transparency", 4), ("envelope", 5), ("envelopePlain", 6), ("envelopeWindow", 7), ("continuousLong", 8), ("continuousShort", 9), ("tabStock", 10), ("multiPartForm", 11), ("labels", 12), ("multiLayer", 13),)
 
 class JmJobCollationTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4, 5,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4, 5,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("uncollatedSheets", 3), ("collatedDocuments", 4), ("uncollatedDocuments", 5),)
 
 class JmJobSubmissionIDTypeTC(OctetString, TextualConvention):
@@ -65,11 +66,11 @@ class JmJobSubmissionIDTypeTC(OctetString, TextualConvention):
     fixedLength = 1
 
 class JmJobStateTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(2, 3, 4, 5, 6, 7, 8, 9,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(2, 3, 4, 5, 6, 7, 8, 9,))
     namedValues = NamedValues(("unknown", 2), ("pending", 3), ("pendingHeld", 4), ("processing", 5), ("processingStopped", 6), ("canceled", 7), ("aborted", 8), ("completed", 9),)
 
 class JmAttributeTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 3, 4, 5, 6, 7, 8, 9, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 50, 51, 52, 53, 54, 55, 56, 70, 71, 72, 73, 74, 75, 76, 77, 90, 91, 92, 93, 94, 95, 96, 97, 110, 111, 112, 113, 114, 115, 130, 131, 132, 150, 151, 152, 170, 171, 172, 173, 174, 175, 190, 191, 192, 193, 194, 195,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 3, 4, 5, 6, 7, 8, 9, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 50, 51, 52, 53, 54, 55, 56, 70, 71, 72, 73, 74, 75, 76, 77, 90, 91, 92, 93, 94, 95, 96, 97, 110, 111, 112, 113, 114, 115, 130, 131, 132, 150, 151, 152, 170, 171, 172, 173, 174, 175, 190, 191, 192, 193, 194, 195,))
     namedValues = NamedValues(("other", 1), ("jobStateReasons2", 3), ("jobStateReasons3", 4), ("jobStateReasons4", 5), ("processingMessage", 6), ("processingMessageNaturalLangTag", 7), ("jobCodedCharSet", 8), ("jobNaturalLanguageTag", 9), ("jobURI", 20), ("jobAccountName", 21), ("serverAssignedJobName", 22), ("jobName", 23), ("jobServiceTypes", 24), ("jobSourceChannelIndex", 25), ("jobSourcePlatformType", 26), ("submittingServerName", 27), ("submittingApplicationName", 28), ("jobOriginatingHost", 29), ("deviceNameRequested", 30), ("queueNameRequested", 31), ("physicalDevice", 32), ("numberOfDocuments", 33), ("fileName", 34), ("documentName", 35), ("jobComment", 36), ("documentFormatIndex", 37), ("documentFormat", 38), ("jobPriority", 50), ("jobProcessAfterDateAndTime", 51), ("jobHold", 52), ("jobHoldUntil", 53), ("outputBin", 54), ("sides", 55), ("finishing", 56), ("printQualityRequested", 70), ("printQualityUsed", 71), ("printerResolutionRequested", 72), ("printerResolutionUsed", 73), ("tonerEcomonyRequested", 74), ("tonerEcomonyUsed", 75), ("tonerDensityRequested", 76), ("tonerDensityUsed", 77), ("jobCopiesRequested", 90), ("jobCopiesCompleted", 91), ("documentCopiesRequested", 92), ("documentCopiesCompleted", 93), ("jobKOctetsTransferred", 94), ("sheetCompletedCopyNumber", 95), ("sheetCompletedDocumentNumber", 96), ("jobCollationType", 97), ("impressionsSpooled", 110), ("impressionsSentToDevice", 111), ("impressionsInterpreted", 112), ("impressionsCompletedCurrentCopy", 113), ("fullColorImpressionsCompleted", 114), ("highlightColorImpressionsCompleted", 115), ("pagesRequested", 130), ("pagesCompleted", 131), ("pagesCompletedCurrentCopy", 132), ("sheetsRequested", 150), ("sheetsCompleted", 151), ("sheetsCompletedCurrentCopy", 152), ("mediumRequested", 170), ("mediumConsumed", 171), ("colorantRequested", 172), ("colorantConsumed", 173), ("mediumTypeConsumed", 174), ("mediumSizeConsumed", 175), ("jobSubmissionToServerTime", 190), ("jobSubmissionTime", 191), ("jobStartedBeingHeldTime", 192), ("jobStartedProcessingTime", 193), ("jobCompletionTime", 194), ("jobProcessingCPUTime", 195),)
 
 class JmJobServiceTypesTC(Integer32, TextualConvention):
@@ -167,4 +168,4 @@ jmJobGroup = ObjectGroup((1, 3, 6, 1, 4, 1, 2699, 1, 1, 3, 2, 3)).setObjects(*((
 if mibBuilder.loadTexts: jmJobGroup.setDescription('The job group.')
 jmAttributeGroup = ObjectGroup((1, 3, 6, 1, 4, 1, 2699, 1, 1, 3, 2, 4)).setObjects(*(("Job-Monitoring-MIB", "jmAttributeValueAsInteger"), ("Job-Monitoring-MIB", "jmAttributeValueAsOctets"),))
 if mibBuilder.loadTexts: jmAttributeGroup.setDescription('The attribute group.')
-mibBuilder.exportSymbols("Job-Monitoring-MIB", JmTimeStampTC=JmTimeStampTC, jmJobIDJobIndex=jmJobIDJobIndex, JmJobStateReasons2TC=JmJobStateReasons2TC, jmJobKOctetsProcessed=jmJobKOctetsProcessed, jmJobIDTable=jmJobIDTable, jmJobIndex=jmJobIndex, jmGeneralGroup=jmGeneralGroup, jmNumberOfInterveningJobs=jmNumberOfInterveningJobs, JmUTF8StringTC=JmUTF8StringTC, jmJobIDGroup=jmJobIDGroup, JmAttributeTypeTC=JmAttributeTypeTC, jmAttributeTypeIndex=jmAttributeTypeIndex, JmPrintQualityTC=JmPrintQualityTC, jmJobStateReasons1=jmJobStateReasons1, jmMIBGroups=jmMIBGroups, jmJobImpressionsPerCopyRequested=jmJobImpressionsPerCopyRequested, JmJobSourcePlatformTypeTC=JmJobSourcePlatformTypeTC, jmAttributeValueAsInteger=jmAttributeValueAsInteger, jobmonMIBObjects=jobmonMIBObjects, JmJobSubmissionIDTypeTC=JmJobSubmissionIDTypeTC, jmAttributeGroup=jmAttributeGroup, jmMIBCompliance=jmMIBCompliance, jmJobEntry=jmJobEntry, jmAttributeValueAsOctets=jmAttributeValueAsOctets, jmGeneralOldestActiveJobIndex=jmGeneralOldestActiveJobIndex, jmGeneralJobPersistence=jmGeneralJobPersistence, JmNaturalLanguageTagTC=JmNaturalLanguageTagTC, JmFinishingTC=JmFinishingTC, JmJobServiceTypesTC=JmJobServiceTypesTC, jmGeneralJobSetIndex=jmGeneralJobSetIndex, jmJobKOctetsPerCopyRequested=jmJobKOctetsPerCopyRequested, jmGeneralJobSetName=jmGeneralJobSetName, JmPrinterResolutionTC=JmPrinterResolutionTC, jmJob=jmJob, JmMediumTypeTC=JmMediumTypeTC, jobmonMIB=jobmonMIB, jmJobImpressionsCompleted=jmJobImpressionsCompleted, JmJobStateReasons1TC=JmJobStateReasons1TC, JmJobCollationTypeTC=JmJobCollationTypeTC, jmGeneralTable=jmGeneralTable, jmJobIDEntry=jmJobIDEntry, jmGeneralAttributePersistence=jmGeneralAttributePersistence, JmJobStateTC=JmJobStateTC, jmJobGroup=jmJobGroup, jmAttributeTable=jmAttributeTable, jmGeneralNumberOfActiveJobs=jmGeneralNumberOfActiveJobs, jmAttributeInstanceIndex=jmAttributeInstanceIndex, jmJobIDJobSetIndex=jmJobIDJobSetIndex, jmJobState=jmJobState, JmJobStateReasons3TC=JmJobStateReasons3TC, jmGeneralEntry=jmGeneralEntry, JmBooleanTC=JmBooleanTC, jmJobTable=jmJobTable, jmMIBConformance=jmMIBConformance, jmJobOwner=jmJobOwner, JmJobStringTC=JmJobStringTC, jobmonMIBNotifications=jobmonMIBNotifications, jmJobID=jmJobID, jmAttribute=jmAttribute, JmTonerEconomyTC=JmTonerEconomyTC, PYSNMP_MODULE_ID=jobmonMIB, jmGeneral=jmGeneral, jmJobSubmissionID=jmJobSubmissionID, JmJobStateReasons4TC=JmJobStateReasons4TC, jmGeneralNewestActiveJobIndex=jmGeneralNewestActiveJobIndex, jmAttributeEntry=jmAttributeEntry)
+mibBuilder.exportSymbols("Job-Monitoring-MIB", PYSNMP_MODULE_ID=jobmonMIB, JmUTF8StringTC=JmUTF8StringTC, jmGeneralJobSetIndex=jmGeneralJobSetIndex, jmAttribute=jmAttribute, jmGeneralJobSetName=jmGeneralJobSetName, jmJobIDJobSetIndex=jmJobIDJobSetIndex, jmJob=jmJob, jmGeneral=jmGeneral, jmJobTable=jmJobTable, jmGeneralGroup=jmGeneralGroup, JmBooleanTC=JmBooleanTC, jmAttributeEntry=jmAttributeEntry, jmJobIDGroup=jmJobIDGroup, JmPrinterResolutionTC=JmPrinterResolutionTC, jmGeneralOldestActiveJobIndex=jmGeneralOldestActiveJobIndex, JmNaturalLanguageTagTC=JmNaturalLanguageTagTC, jmJobStateReasons1=jmJobStateReasons1, jmGeneralEntry=jmGeneralEntry, jmAttributeGroup=jmAttributeGroup, JmJobSubmissionIDTypeTC=JmJobSubmissionIDTypeTC, JmJobServiceTypesTC=JmJobServiceTypesTC, JmJobStateTC=JmJobStateTC, JmAttributeTypeTC=JmAttributeTypeTC, JmTimeStampTC=JmTimeStampTC, JmPrintQualityTC=JmPrintQualityTC, jmGeneralTable=jmGeneralTable, jmMIBGroups=jmMIBGroups, jmJobKOctetsProcessed=jmJobKOctetsProcessed, jmJobGroup=jmJobGroup, JmTonerEconomyTC=JmTonerEconomyTC, jmJobImpressionsCompleted=jmJobImpressionsCompleted, JmFinishingTC=JmFinishingTC, JmJobCollationTypeTC=JmJobCollationTypeTC, JmJobSourcePlatformTypeTC=JmJobSourcePlatformTypeTC, jmGeneralAttributePersistence=jmGeneralAttributePersistence, jmJobID=jmJobID, jmAttributeTable=jmAttributeTable, JmJobStateReasons2TC=JmJobStateReasons2TC, jmJobSubmissionID=jmJobSubmissionID, jmGeneralNumberOfActiveJobs=jmGeneralNumberOfActiveJobs, jmJobEntry=jmJobEntry, jmAttributeValueAsInteger=jmAttributeValueAsInteger, jmJobState=jmJobState, jmJobKOctetsPerCopyRequested=jmJobKOctetsPerCopyRequested, jobmonMIB=jobmonMIB, jmAttributeValueAsOctets=jmAttributeValueAsOctets, jmMIBConformance=jmMIBConformance, JmMediumTypeTC=JmMediumTypeTC, jmGeneralNewestActiveJobIndex=jmGeneralNewestActiveJobIndex, jmAttributeTypeIndex=jmAttributeTypeIndex, jmJobImpressionsPerCopyRequested=jmJobImpressionsPerCopyRequested, jmJobIDEntry=jmJobIDEntry, JmJobStateReasons4TC=JmJobStateReasons4TC, jmJobIndex=jmJobIndex, jmJobOwner=jmJobOwner, jmAttributeInstanceIndex=jmAttributeInstanceIndex, JmJobStateReasons1TC=JmJobStateReasons1TC, jmJobIDJobIndex=jmJobIDJobIndex, JmJobStateReasons3TC=JmJobStateReasons3TC, jobmonMIBNotifications=jobmonMIBNotifications, jmJobIDTable=jmJobIDTable, jmGeneralJobPersistence=jmGeneralJobPersistence, JmJobStringTC=JmJobStringTC, jmMIBCompliance=jmMIBCompliance, jobmonMIBObjects=jobmonMIBObjects, jmNumberOfInterveningJobs=jmNumberOfInterveningJobs)

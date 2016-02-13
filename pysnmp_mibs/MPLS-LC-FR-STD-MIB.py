@@ -1,20 +1,21 @@
 #
 # PySNMP MIB module MPLS-LC-FR-STD-MIB (http://pysnmp.sf.net)
 # ASN.1 source http://mibs.snmplabs.com:80/asn1/MPLS-LC-FR-STD-MIB
-# Produced by pysmi-0.0.3 at Wed Jul  1 22:30:10 2015
-# On host cray platform Linux version 2.6.37.6-smp by user ilya
-# Using Python version 2.7.2 (default, Apr  2 2012, 20:32:47) 
+# Produced by pysmi-0.0.7 at Sun Feb 14 00:21:02 2016
+# On host bldfarm platform Linux version 4.1.13-100.fc21.x86_64 by user goose
+# Using Python version 3.5.0 (default, Jan  5 2016, 17:11:52) 
 #
-( Integer, ObjectIdentifier, OctetString, ) = mibBuilder.importSymbols("ASN1", "Integer", "ObjectIdentifier", "OctetString")
+( ObjectIdentifier, Integer, OctetString, ) = mibBuilder.importSymbols("ASN1", "ObjectIdentifier", "Integer", "OctetString")
 ( NamedValues, ) = mibBuilder.importSymbols("ASN1-ENUMERATION", "NamedValues")
-( ConstraintsUnion, SingleValueConstraint, ConstraintsIntersection, ValueSizeConstraint, ValueRangeConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "SingleValueConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "ValueRangeConstraint")
+( ConstraintsUnion, ValueRangeConstraint, ConstraintsIntersection, ValueSizeConstraint, SingleValueConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "ValueRangeConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "SingleValueConstraint")
 ( DLCI, ) = mibBuilder.importSymbols("FRAME-RELAY-DTE-MIB", "DLCI")
 ( mplsInterfaceIndex, ) = mibBuilder.importSymbols("MPLS-LSR-STD-MIB", "mplsInterfaceIndex")
 ( mplsStdMIB, ) = mibBuilder.importSymbols("MPLS-TC-STD-MIB", "mplsStdMIB")
-( NotificationGroup, ModuleCompliance, ObjectGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ModuleCompliance", "ObjectGroup")
-( Integer32, MibScalar, MibTable, MibTableRow, MibTableColumn, NotificationType, MibIdentifier, IpAddress, TimeTicks, Counter64, Unsigned32, ModuleIdentity, Gauge32, iso, ObjectIdentity, Bits, Counter32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Integer32", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "NotificationType", "MibIdentifier", "IpAddress", "TimeTicks", "Counter64", "Unsigned32", "ModuleIdentity", "Gauge32", "iso", "ObjectIdentity", "Bits", "Counter32")
-( StorageType, DisplayString, RowStatus, TextualConvention, ) = mibBuilder.importSymbols("SNMPv2-TC", "StorageType", "DisplayString", "RowStatus", "TextualConvention")
+( ObjectGroup, ModuleCompliance, NotificationGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "ObjectGroup", "ModuleCompliance", "NotificationGroup")
+( TimeTicks, ObjectIdentity, NotificationType, Gauge32, ModuleIdentity, Counter64, Unsigned32, MibIdentifier, MibScalar, MibTable, MibTableRow, MibTableColumn, IpAddress, Integer32, iso, Counter32, Bits, ) = mibBuilder.importSymbols("SNMPv2-SMI", "TimeTicks", "ObjectIdentity", "NotificationType", "Gauge32", "ModuleIdentity", "Counter64", "Unsigned32", "MibIdentifier", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "IpAddress", "Integer32", "iso", "Counter32", "Bits")
+( TextualConvention, StorageType, DisplayString, RowStatus, ) = mibBuilder.importSymbols("SNMPv2-TC", "TextualConvention", "StorageType", "DisplayString", "RowStatus")
 mplsLcFrStdMIB = ModuleIdentity((1, 3, 6, 1, 2, 1, 10, 166, 10)).setRevisions(("2006-01-12 00:00",))
+if mibBuilder.loadTexts: mplsLcFrStdMIB.setLastUpdated('200601120000Z')
 if mibBuilder.loadTexts: mplsLcFrStdMIB.setOrganization('Multiprotocol Label Switching (MPLS) Working Group')
 if mibBuilder.loadTexts: mplsLcFrStdMIB.setContactInfo('        Thomas D. Nadeau\n                Cisco Systems, Inc.\n        Email:  tnadeau@cisco.com\n\n                Subrahmanya Hegde\n        Email:  subrah@cisco.com\n\n        General comments should be sent to mpls@uu.net\n       ')
 if mibBuilder.loadTexts: mplsLcFrStdMIB.setDescription('This MIB module contains managed object definitions for\n        MPLS Label-Controlled Frame-Relay interfaces as defined\n        in (RFC3034).\n\n        Copyright (C) The Internet Society (2006).  This\n        version of this MIB module is part of RFC 4368; see\n        the RFC itself for full legal notices.')
@@ -23,7 +24,7 @@ mplsLcFrStdObjects = MibIdentifier((1, 3, 6, 1, 2, 1, 10, 166, 10, 1))
 mplsLcFrStdConformance = MibIdentifier((1, 3, 6, 1, 2, 1, 10, 166, 10, 2))
 mplsLcFrStdInterfaceConfTable = MibTable((1, 3, 6, 1, 2, 1, 10, 166, 10, 1, 1), )
 if mibBuilder.loadTexts: mplsLcFrStdInterfaceConfTable.setDescription("This table specifies per-interface MPLS LC-FR\n        capability and associated information.  In particular,\n        this table sparsely extends the MPLS-LSR-STD-MIB's\n        mplsInterfaceConfTable.")
-mplsLcFrStdInterfaceConfEntry = MibTableRow((1, 3, 6, 1, 2, 1, 10, 166, 10, 1, 1, 1), ).setIndexNames((0, "MPLS-LC-FR-STD-MIB", "mplsInterfaceIndex"))
+mplsLcFrStdInterfaceConfEntry = MibTableRow((1, 3, 6, 1, 2, 1, 10, 166, 10, 1, 1, 1), ).setIndexNames((0, "MPLS-LSR-STD-MIB", "mplsInterfaceIndex"))
 if mibBuilder.loadTexts: mplsLcFrStdInterfaceConfEntry.setDescription('An entry in this table is created by an LSR for\n        every interface capable of supporting MPLS LC-FR.\n        Each entry in this table will exist only if a\n        corresponding entry in ifTable and mplsInterfaceConfTable\n        exists.  If the associated entries in ifTable and\n        mplsInterfaceConfTable are deleted, the corresponding\n        entry in this table must also be deleted shortly\n        thereafter.')
 mplsLcFrStdTrafficMinDlci = MibTableColumn((1, 3, 6, 1, 2, 1, 10, 166, 10, 1, 1, 1, 1), DLCI()).setMaxAccess("readcreate")
 if mibBuilder.loadTexts: mplsLcFrStdTrafficMinDlci.setDescription('This is the minimum DLCI value over which this\n        LSR is willing to accept traffic on this\n        interface.')
@@ -45,4 +46,4 @@ mplsLcFrStdModuleReadOnlyCompliance = ModuleCompliance((1, 3, 6, 1, 2, 1, 10, 16
 if mibBuilder.loadTexts: mplsLcFrStdModuleReadOnlyCompliance.setDescription('Compliance requirement for implementations that only\n        provide read-only support for MPLS-LC-FR-STD-MIB.\n        Such devices can be monitored but cannot be configured\n        using this MIB module.\n       ')
 mplsLcFrStdIfGroup = ObjectGroup((1, 3, 6, 1, 2, 1, 10, 166, 10, 2, 2, 1)).setObjects(*(("MPLS-LC-FR-STD-MIB", "mplsLcFrStdTrafficMinDlci"), ("MPLS-LC-FR-STD-MIB", "mplsLcFrStdTrafficMaxDlci"), ("MPLS-LC-FR-STD-MIB", "mplsLcFrStdCtrlMinDlci"), ("MPLS-LC-FR-STD-MIB", "mplsLcFrStdCtrlMaxDlci"), ("MPLS-LC-FR-STD-MIB", "mplsLcFrStdInterfaceConfRowStatus"), ("MPLS-LC-FR-STD-MIB", "mplsLcFrStdInterfaceConfStorageType"),))
 if mibBuilder.loadTexts: mplsLcFrStdIfGroup.setDescription('Collection of objects needed for MPLS LC-FR\n           interface configuration.')
-mibBuilder.exportSymbols("MPLS-LC-FR-STD-MIB", mplsLcFrStdIfGroup=mplsLcFrStdIfGroup, mplsLcFrStdMIB=mplsLcFrStdMIB, mplsLcFrStdModuleReadOnlyCompliance=mplsLcFrStdModuleReadOnlyCompliance, mplsLcFrStdInterfaceConfEntry=mplsLcFrStdInterfaceConfEntry, PYSNMP_MODULE_ID=mplsLcFrStdMIB, mplsLcFrStdCtrlMaxDlci=mplsLcFrStdCtrlMaxDlci, mplsLcFrStdInterfaceConfTable=mplsLcFrStdInterfaceConfTable, mplsLcFrStdObjects=mplsLcFrStdObjects, mplsLcFrStdTrafficMaxDlci=mplsLcFrStdTrafficMaxDlci, mplsLcFrStdCtrlMinDlci=mplsLcFrStdCtrlMinDlci, mplsLcFrStdInterfaceConfStorageType=mplsLcFrStdInterfaceConfStorageType, mplsLcFrStdInterfaceConfRowStatus=mplsLcFrStdInterfaceConfRowStatus, mplsLcFrStdGroups=mplsLcFrStdGroups, mplsLcFrStdNotifications=mplsLcFrStdNotifications, mplsLcFrStdTrafficMinDlci=mplsLcFrStdTrafficMinDlci, mplsLcFrStdModuleFullCompliance=mplsLcFrStdModuleFullCompliance, mplsLcFrStdCompliances=mplsLcFrStdCompliances, mplsLcFrStdConformance=mplsLcFrStdConformance)
+mibBuilder.exportSymbols("MPLS-LC-FR-STD-MIB", mplsLcFrStdInterfaceConfStorageType=mplsLcFrStdInterfaceConfStorageType, mplsLcFrStdConformance=mplsLcFrStdConformance, mplsLcFrStdModuleReadOnlyCompliance=mplsLcFrStdModuleReadOnlyCompliance, mplsLcFrStdMIB=mplsLcFrStdMIB, PYSNMP_MODULE_ID=mplsLcFrStdMIB, mplsLcFrStdTrafficMinDlci=mplsLcFrStdTrafficMinDlci, mplsLcFrStdCtrlMaxDlci=mplsLcFrStdCtrlMaxDlci, mplsLcFrStdIfGroup=mplsLcFrStdIfGroup, mplsLcFrStdGroups=mplsLcFrStdGroups, mplsLcFrStdInterfaceConfTable=mplsLcFrStdInterfaceConfTable, mplsLcFrStdTrafficMaxDlci=mplsLcFrStdTrafficMaxDlci, mplsLcFrStdCompliances=mplsLcFrStdCompliances, mplsLcFrStdModuleFullCompliance=mplsLcFrStdModuleFullCompliance, mplsLcFrStdCtrlMinDlci=mplsLcFrStdCtrlMinDlci, mplsLcFrStdNotifications=mplsLcFrStdNotifications, mplsLcFrStdObjects=mplsLcFrStdObjects, mplsLcFrStdInterfaceConfRowStatus=mplsLcFrStdInterfaceConfRowStatus, mplsLcFrStdInterfaceConfEntry=mplsLcFrStdInterfaceConfEntry)

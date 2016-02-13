@@ -1,78 +1,79 @@
 #
 # PySNMP MIB module Finisher-MIB (http://pysnmp.sf.net)
 # ASN.1 source http://mibs.snmplabs.com:80/asn1/Finisher-MIB
-# Produced by pysmi-0.0.3 at Wed Jul  1 22:28:02 2015
-# On host cray platform Linux version 2.6.37.6-smp by user ilya
-# Using Python version 2.7.2 (default, Apr  2 2012, 20:32:47) 
+# Produced by pysmi-0.0.7 at Sun Feb 14 00:12:48 2016
+# On host bldfarm platform Linux version 4.1.13-100.fc21.x86_64 by user goose
+# Using Python version 3.5.0 (default, Jan  5 2016, 17:11:52) 
 #
-( Integer, ObjectIdentifier, OctetString, ) = mibBuilder.importSymbols("ASN1", "Integer", "ObjectIdentifier", "OctetString")
+( ObjectIdentifier, Integer, OctetString, ) = mibBuilder.importSymbols("ASN1", "ObjectIdentifier", "Integer", "OctetString")
 ( NamedValues, ) = mibBuilder.importSymbols("ASN1-ENUMERATION", "NamedValues")
-( ConstraintsUnion, SingleValueConstraint, ConstraintsIntersection, ValueSizeConstraint, ValueRangeConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "SingleValueConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "ValueRangeConstraint")
+( ConstraintsUnion, ValueRangeConstraint, SingleValueConstraint, ValueSizeConstraint, ConstraintsIntersection, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "ValueRangeConstraint", "SingleValueConstraint", "ValueSizeConstraint", "ConstraintsIntersection")
 ( hrDeviceIndex, ) = mibBuilder.importSymbols("HOST-RESOURCES-MIB", "hrDeviceIndex")
-( PrtSubUnitStatusTC, PrtMediaUnitTC, PrtMarkerSuppliesClassTC, PrtCapacityUnitTC, PrtInputTypeTC, PrtMarkerSuppliesSupplyUnitTC, prtMIBConformance, PrtMarkerSuppliesTypeTC, PresentOnOff, printmib, ) = mibBuilder.importSymbols("Printer-MIB", "PrtSubUnitStatusTC", "PrtMediaUnitTC", "PrtMarkerSuppliesClassTC", "PrtCapacityUnitTC", "PrtInputTypeTC", "PrtMarkerSuppliesSupplyUnitTC", "prtMIBConformance", "PrtMarkerSuppliesTypeTC", "PresentOnOff", "printmib")
+( PrtMarkerSuppliesSupplyUnitTC, PrtMediaUnitTC, prtMIBConformance, PrtInputTypeTC, PresentOnOff, printmib, PrtCapacityUnitTC, PrtMarkerSuppliesTypeTC, PrtMarkerSuppliesClassTC, PrtSubUnitStatusTC, ) = mibBuilder.importSymbols("Printer-MIB", "PrtMarkerSuppliesSupplyUnitTC", "PrtMediaUnitTC", "prtMIBConformance", "PrtInputTypeTC", "PresentOnOff", "printmib", "PrtCapacityUnitTC", "PrtMarkerSuppliesTypeTC", "PrtMarkerSuppliesClassTC", "PrtSubUnitStatusTC")
 ( NotificationGroup, ModuleCompliance, ObjectGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ModuleCompliance", "ObjectGroup")
-( Integer32, MibScalar, MibTable, MibTableRow, MibTableColumn, NotificationType, MibIdentifier, mib_2, IpAddress, TimeTicks, Counter64, Unsigned32, ModuleIdentity, Counter32, iso, ObjectIdentity, Bits, experimental, Gauge32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Integer32", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "NotificationType", "MibIdentifier", "mib-2", "IpAddress", "TimeTicks", "Counter64", "Unsigned32", "ModuleIdentity", "Counter32", "iso", "ObjectIdentity", "Bits", "experimental", "Gauge32")
-( DisplayString, TextualConvention, ) = mibBuilder.importSymbols("SNMPv2-TC", "DisplayString", "TextualConvention")
+( Bits, ModuleIdentity, Counter32, IpAddress, Unsigned32, MibIdentifier, ObjectIdentity, MibScalar, MibTable, MibTableRow, MibTableColumn, iso, mib_2, experimental, NotificationType, Counter64, TimeTicks, Gauge32, Integer32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Bits", "ModuleIdentity", "Counter32", "IpAddress", "Unsigned32", "MibIdentifier", "ObjectIdentity", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "iso", "mib-2", "experimental", "NotificationType", "Counter64", "TimeTicks", "Gauge32", "Integer32")
+( TextualConvention, DisplayString, ) = mibBuilder.importSymbols("SNMPv2-TC", "TextualConvention", "DisplayString")
 finisherMIB = ModuleIdentity((1, 3, 6, 1, 3, 64))
+if mibBuilder.loadTexts: finisherMIB.setLastUpdated('9810090000Z')
 if mibBuilder.loadTexts: finisherMIB.setOrganization('IETF Printer MIB Working Group')
 if mibBuilder.loadTexts: finisherMIB.setContactInfo("Ron Bergman\n         Dataproducts Corp.\n         1757 Tapo Canyon Road\n         Simi Valley, CA 91063-3394\n         rbergma@dpc.com\n\n        Send comments to the printmib WG using the Finisher MIB\n        Project (FIN) Mailing List:  fin@pwg.org\n\n        For further information, access the PWG web page under 'FIN':\n              http://www.pwg.org/\n\n        Implementers of this specification are encouraged to join the\n        fin mailing list in order to participate in discussions on any\n        clarifications needed and registration proposals being reviewed\n        in order to achieve consensus.")
 if mibBuilder.loadTexts: finisherMIB.setDescription('The MIB module for management of printer finisher units.\n         The Finisher MIB is an extension of the Printer MIB.')
 class FinDeviceTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("stitcher", 3), ("folder", 4), ("binder", 5), ("trimmer", 6), ("dieCutter", 7), ("puncher", 8), ("perforater", 9), ("slitter", 10), ("separationCutter", 11), ("imprinter", 12), ("wrapper", 13), ("bander", 14), ("makeEnvelope", 15), ("stacker", 16), ("sheetRotator", 17),)
 
 class FinAttributeTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30, 31, 40, 50, 80, 81, 82, 83, 100, 130, 160, 161, 162,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30, 31, 40, 50, 80, 81, 82, 83, 100, 130, 160, 161, 162,))
     namedValues = NamedValues(("other", 1), ("deviceName", 3), ("deviceVendorName", 4), ("deviceModel", 5), ("deviceVersion", 6), ("deviceSerialNumber", 7), ("maximumSheets", 8), ("finProcessOffsetUnits", 9), ("finReferenceEdge", 10), ("finAxisOffset", 11), ("finJogEdge", 12), ("finHeadLocation", 13), ("finOperationRestrictions", 14), ("finNumberOfPositions", 15), ("namedConfiguration", 16), ("finMediaTypeRestriction", 17), ("finPrinterInputTraySupported", 18), ("finPreviousFinishingOperation", 19), ("finNextFinishingOperation", 20), ("stitchingType", 30), ("stitchingDirection", 31), ("foldingType", 40), ("bindingType", 50), ("punchHoleType", 80), ("punchHoleSizeLongDim", 81), ("punchHoleSizeShortDim", 82), ("punchPattern", 83), ("slittingType", 100), ("wrappingType", 130), ("stackOutputType", 160), ("stackOffset", 161), ("stackRotation", 162),)
 
 class FinEdgeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(3, 4, 5, 6,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(3, 4, 5, 6,))
     namedValues = NamedValues(("topEdge", 3), ("bottomEdge", 4), ("leftEdge", 5), ("rightEdge", 6),)
 
 class FinStitchingTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 4, 5, 6, 7, 8, 9, 10,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 4, 5, 6, 7, 8, 9, 10,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("stapleTopLeft", 4), ("stapleBottomLeft", 5), ("stapleTopRight", 6), ("stapleBottomRight", 7), ("saddleStitch", 8), ("edgeStitch", 9), ("stapleDual", 10),)
 
 class StitchingDirTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(2, 3, 4,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(2, 3, 4,))
     namedValues = NamedValues(("unknown", 2), ("topDown", 3), ("bottomUp", 4),)
 
 class StitchingAngleTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(2, 3, 4, 5,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(2, 3, 4, 5,))
     namedValues = NamedValues(("unknown", 2), ("horizontal", 3), ("vertical", 4), ("slanted", 5),)
 
 class FinFoldingTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4, 5,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4, 5,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("zFold", 3), ("halfFold", 4), ("letterFold", 5),)
 
 class FinBindingTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 4, 5, 6, 7, 8, 9, 10, 11,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 4, 5, 6, 7, 8, 9, 10, 11,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("tape", 4), ("plastic", 5), ("velo", 6), ("perfect", 7), ("spiral", 8), ("adhesive", 9), ("comb", 10), ("padding", 11),)
 
 class FinPunchHoleTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4, 5, 6, 7,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4, 5, 6, 7,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("round", 3), ("oblong", 4), ("square", 5), ("rectangular", 6), ("star", 7),)
 
 class FinPunchPatternTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("twoHoleUSTop", 4), ("threeHoleUS", 5), ("twoHoleDIN", 6), ("fourHoleDIN", 7), ("twentyTwoHoleUS", 8), ("nineteenHoleUS", 9), ("twoHoleMetric", 10), ("swedish4Hole", 11), ("twoHoleUSSide", 12), ("fiveHoleUS", 13), ("sevenHoleUS", 14), ("mixed7H4S", 15), ("norweg6Hole", 16), ("metric26Hole", 17), ("metric30Hole", 18),)
 
 class FinSlittingTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 4, 5,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 4, 5,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("slitAndSeparate", 4), ("slitAndMerge", 5),)
 
 class FinWrappingTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 4, 5,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 4, 5,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("shrinkWrap", 4), ("paperWrap", 5),)
 
 class FinStackOutputTypeTC(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 4, 5, 6,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 4, 5, 6,))
     namedValues = NamedValues(("other", 1), ("unknown", 2), ("straight", 4), ("offset", 5), ("crissCross", 6),)
 
 finDevice = MibIdentifier((1, 3, 6, 1, 2, 1, 43, 30))
 finDeviceTable = MibTable((1, 3, 6, 1, 2, 1, 43, 30, 1), )
 if mibBuilder.loadTexts: finDeviceTable.setDescription('This table defines the finishing device subunits,\n       including information regarding possible configuration\n       options and the status for each finisher device subunit.')
-finDeviceEntry = MibTableRow((1, 3, 6, 1, 2, 1, 43, 30, 1, 1), ).setIndexNames((0, "Finisher-MIB", "hrDeviceIndex"), (0, "Finisher-MIB", "finDeviceIndex"))
+finDeviceEntry = MibTableRow((1, 3, 6, 1, 2, 1, 43, 30, 1, 1), ).setIndexNames((0, "HOST-RESOURCES-MIB", "hrDeviceIndex"), (0, "Finisher-MIB", "finDeviceIndex"))
 if mibBuilder.loadTexts: finDeviceEntry.setDescription('There is an entry in the finishing device table for each\n       possible finisher process.')
 finDeviceIndex = MibTableColumn((1, 3, 6, 1, 2, 1, 43, 30, 1, 1, 1), Integer32().subtype(subtypeSpec=ValueRangeConstraint(1,65535)))
 if mibBuilder.loadTexts: finDeviceIndex.setDescription('A unique value used to identify a finisher process.\n       Although these values may change due to a major\n       reconfiguration of the printer system (e.g. the addition\n       of new finishing processes), the values are normally\n       expected to remain stable across successive power cycles.')
@@ -97,7 +98,7 @@ if mibBuilder.loadTexts: finDeviceDescription.setDescription('A free form text d
 finSupply = MibIdentifier((1, 3, 6, 1, 2, 1, 43, 31))
 finSupplyTable = MibTable((1, 3, 6, 1, 2, 1, 43, 31, 1), )
 if mibBuilder.loadTexts: finSupplyTable.setDescription('Each unique source of supply is an entry in the finisher\n       supply table. Each supply entry has its own\n       characteristics associated with it such as colorant and\n       current supply level.')
-finSupplyEntry = MibTableRow((1, 3, 6, 1, 2, 1, 43, 31, 1, 1), ).setIndexNames((0, "Finisher-MIB", "hrDeviceIndex"), (0, "Finisher-MIB", "finSupplyIndex"))
+finSupplyEntry = MibTableRow((1, 3, 6, 1, 2, 1, 43, 31, 1, 1), ).setIndexNames((0, "HOST-RESOURCES-MIB", "hrDeviceIndex"), (0, "Finisher-MIB", "finSupplyIndex"))
 if mibBuilder.loadTexts: finSupplyEntry.setDescription('A list of finisher devices, with their associated\n       supplies and supplies characteristics.')
 finSupplyIndex = MibTableColumn((1, 3, 6, 1, 2, 1, 43, 31, 1, 1, 1), Integer32().subtype(subtypeSpec=ValueRangeConstraint(1,65535)))
 if mibBuilder.loadTexts: finSupplyIndex.setDescription('A unique value used by a finisher to identify this supply\n       container/receptacle.  Although these values may change\n       due to a major reconfiguration of the finisher (e.g. the\n       addition of new supply sources to the finisher), values\n       are normally expected to remain stable across successive\n       power cycles.')
@@ -120,7 +121,7 @@ if mibBuilder.loadTexts: finSupplyColorName.setDescription('The name of the colo
 finSupplyMediaInput = MibIdentifier((1, 3, 6, 1, 2, 1, 43, 32))
 finSupplyMediaInputTable = MibTable((1, 3, 6, 1, 2, 1, 43, 32, 1), )
 if mibBuilder.loadTexts: finSupplyMediaInputTable.setDescription('The input subunits associated with a finisher supply media\n       are each represented by an entry in this table.')
-finSupplyMediaInputEntry = MibTableRow((1, 3, 6, 1, 2, 1, 43, 32, 1, 1), ).setIndexNames((0, "Finisher-MIB", "hrDeviceIndex"), (0, "Finisher-MIB", "finSupplyMediaInputIndex"))
+finSupplyMediaInputEntry = MibTableRow((1, 3, 6, 1, 2, 1, 43, 32, 1, 1), ).setIndexNames((0, "HOST-RESOURCES-MIB", "hrDeviceIndex"), (0, "Finisher-MIB", "finSupplyMediaInputIndex"))
 if mibBuilder.loadTexts: finSupplyMediaInputEntry.setDescription('A list of finisher supply media input subunit features and\n       characteristics.')
 finSupplyMediaInputIndex = MibTableColumn((1, 3, 6, 1, 2, 1, 43, 32, 1, 1, 1), Integer32().subtype(subtypeSpec=ValueRangeConstraint(1,65535)))
 if mibBuilder.loadTexts: finSupplyMediaInputIndex.setDescription('A unique value used by a finisher to identify this supply\n       media input subunit.  Although these values may change\n       due to a major reconfiguration of the finisher (e.g. the\n       addition of new supply media input sources to the\n       finisher), values are normally expected to remain stable\n       across successive power cycles.')
@@ -155,7 +156,7 @@ if mibBuilder.loadTexts: finSupplyMediaInputMediaType.setDescription('The name o
 finDeviceAttribute = MibIdentifier((1, 3, 6, 1, 2, 1, 43, 33))
 finDeviceAttributeTable = MibTable((1, 3, 6, 1, 2, 1, 43, 33, 1), )
 if mibBuilder.loadTexts: finDeviceAttributeTable.setDescription('The attribute table defines special parameters that are\n       applicable only to a minority of the finisher devices.\n       An attribute table entry is used, rather than unique\n       objects, to minimize the number of MIB objects and to\n       allow for expansion without the addition of MIB objects.\n       Each finisher device is represented by a separate row\n       in the device subunit attribute table.')
-finDeviceAttributeEntry = MibTableRow((1, 3, 6, 1, 2, 1, 43, 33, 1, 1), ).setIndexNames((0, "Finisher-MIB", "hrDeviceIndex"), (0, "Finisher-MIB", "finDeviceIndex"), (0, "Finisher-MIB", "finDeviceAttributeTypeIndex"), (0, "Finisher-MIB", "finDeviceAttributeInstanceIndex"))
+finDeviceAttributeEntry = MibTableRow((1, 3, 6, 1, 2, 1, 43, 33, 1, 1), ).setIndexNames((0, "HOST-RESOURCES-MIB", "hrDeviceIndex"), (0, "Finisher-MIB", "finDeviceIndex"), (0, "Finisher-MIB", "finDeviceAttributeTypeIndex"), (0, "Finisher-MIB", "finDeviceAttributeInstanceIndex"))
 if mibBuilder.loadTexts: finDeviceAttributeEntry.setDescription('Each entry defines a finisher function parameter that\n       cannot be represented by an object in the finisher\n       device subunit table.')
 finDeviceAttributeTypeIndex = MibTableColumn((1, 3, 6, 1, 2, 1, 43, 33, 1, 1, 1), FinAttributeTypeTC())
 if mibBuilder.loadTexts: finDeviceAttributeTypeIndex.setDescription('Defines the attribute type represented by this row.')
@@ -176,4 +177,4 @@ finSupplyMediaInputGroup = ObjectGroup((1, 3, 6, 1, 2, 1, 43, 2, 4, 3)).setObjec
 if mibBuilder.loadTexts: finSupplyMediaInputGroup.setDescription('The finisher supply, media input group.')
 finDeviceAttributeGroup = ObjectGroup((1, 3, 6, 1, 2, 1, 43, 2, 4, 4)).setObjects(*(("Finisher-MIB", "finDeviceAttributeValueAsInteger"), ("Finisher-MIB", "finDeviceAttributeValueAsOctets"),))
 if mibBuilder.loadTexts: finDeviceAttributeGroup.setDescription('The finisher device attribute group.')
-mibBuilder.exportSymbols("Finisher-MIB", finSupplyMaxCapacity=finSupplyMaxCapacity, finSupplyTable=finSupplyTable, StitchingDirTypeTC=StitchingDirTypeTC, FinSlittingTypeTC=FinSlittingTypeTC, finDeviceAttributeTypeIndex=finDeviceAttributeTypeIndex, finSupplyMediaInputType=finSupplyMediaInputType, finDeviceAttribute=finDeviceAttribute, finDeviceAttributeValueAsInteger=finDeviceAttributeValueAsInteger, finDeviceTable=finDeviceTable, finDeviceAttributeInstanceIndex=finDeviceAttributeInstanceIndex, finSupplyIndex=finSupplyIndex, finSupplyMediaInputDimUnit=finSupplyMediaInputDimUnit, finSupplyType=finSupplyType, finDeviceMaxCapacity=finDeviceMaxCapacity, finDeviceType=finDeviceType, finSupplyMediaInputMediaDimXFeedDir=finSupplyMediaInputMediaDimXFeedDir, finDeviceDescription=finDeviceDescription, finSupplyMediaInputMediaName=finSupplyMediaInputMediaName, finSupplyColorName=finSupplyColorName, finDevice=finDevice, finSupplyMediaInputStatus=finSupplyMediaInputStatus, finSupplyEntry=finSupplyEntry, finMIBCompliance=finMIBCompliance, finDeviceGroup=finDeviceGroup, finSupplyClass=finSupplyClass, finSupplyDescription=finSupplyDescription, FinStitchingTypeTC=FinStitchingTypeTC, FinAttributeTypeTC=FinAttributeTypeTC, finSupplyMediaInputMediaType=finSupplyMediaInputMediaType, finisherMIB=finisherMIB, finSupplyMediaInputMediaDimFeedDir=finSupplyMediaInputMediaDimFeedDir, FinPunchPatternTC=FinPunchPatternTC, finDeviceAssociatedMediaPaths=finDeviceAssociatedMediaPaths, finMIBGroups=finMIBGroups, finSupplyMediaInputDescription=finSupplyMediaInputDescription, finDeviceAttributeValueAsOctets=finDeviceAttributeValueAsOctets, finSupplyMediaInputMediaThickness=finSupplyMediaInputMediaThickness, FinEdgeTC=FinEdgeTC, finDeviceAttributeGroup=finDeviceAttributeGroup, finSupplyMediaInputDeviceIndex=finSupplyMediaInputDeviceIndex, FinWrappingTypeTC=FinWrappingTypeTC, finDeviceEntry=finDeviceEntry, finSupplyMediaInputEntry=finSupplyMediaInputEntry, finSupplyUnit=finSupplyUnit, finDeviceIndex=finDeviceIndex, PYSNMP_MODULE_ID=finisherMIB, finDeviceCapacityUnit=finDeviceCapacityUnit, finSupplyMediaInputGroup=finSupplyMediaInputGroup, finSupplyMediaInput=finSupplyMediaInput, finSupplyMediaInputIndex=finSupplyMediaInputIndex, finDeviceAssociatedOutputs=finDeviceAssociatedOutputs, finSupplyMediaInputMediaWeight=finSupplyMediaInputMediaWeight, finDevicePresentOnOff=finDevicePresentOnOff, finDeviceStatus=finDeviceStatus, finSupplyMediaInputTable=finSupplyMediaInputTable, StitchingAngleTypeTC=StitchingAngleTypeTC, FinPunchHoleTypeTC=FinPunchHoleTypeTC, finDeviceAttributeEntry=finDeviceAttributeEntry, FinBindingTypeTC=FinBindingTypeTC, finSupplyDeviceIndex=finSupplyDeviceIndex, finSupplyCurrentLevel=finSupplyCurrentLevel, finSupplyMediaInputSupplyIndex=finSupplyMediaInputSupplyIndex, finSupplyMediaInputName=finSupplyMediaInputName, FinDeviceTypeTC=FinDeviceTypeTC, finSupplyMediaInputSecurity=finSupplyMediaInputSecurity, finSupply=finSupply, finDeviceCurrentCapacity=finDeviceCurrentCapacity, FinFoldingTypeTC=FinFoldingTypeTC, finSupplyGroup=finSupplyGroup, finDeviceAttributeTable=finDeviceAttributeTable, FinStackOutputTypeTC=FinStackOutputTypeTC)
+mibBuilder.exportSymbols("Finisher-MIB", finDeviceMaxCapacity=finDeviceMaxCapacity, finSupplyTable=finSupplyTable, finSupplyMediaInputIndex=finSupplyMediaInputIndex, finSupplyMediaInputMediaName=finSupplyMediaInputMediaName, finDevice=finDevice, finSupplyIndex=finSupplyIndex, finSupplyDescription=finSupplyDescription, FinStackOutputTypeTC=FinStackOutputTypeTC, FinBindingTypeTC=FinBindingTypeTC, finisherMIB=finisherMIB, finSupplyMediaInputDimUnit=finSupplyMediaInputDimUnit, finSupplyMediaInputSecurity=finSupplyMediaInputSecurity, finSupplyMaxCapacity=finSupplyMaxCapacity, finDeviceEntry=finDeviceEntry, FinEdgeTC=FinEdgeTC, FinFoldingTypeTC=FinFoldingTypeTC, finDeviceIndex=finDeviceIndex, FinAttributeTypeTC=FinAttributeTypeTC, finDeviceAttributeEntry=finDeviceAttributeEntry, finDeviceAttributeValueAsOctets=finDeviceAttributeValueAsOctets, finSupplyMediaInputMediaType=finSupplyMediaInputMediaType, FinPunchHoleTypeTC=FinPunchHoleTypeTC, finMIBCompliance=finMIBCompliance, finDeviceAttributeInstanceIndex=finDeviceAttributeInstanceIndex, FinPunchPatternTC=FinPunchPatternTC, FinStitchingTypeTC=FinStitchingTypeTC, finSupplyMediaInputDescription=finSupplyMediaInputDescription, finSupplyUnit=finSupplyUnit, finSupplyMediaInputName=finSupplyMediaInputName, finDeviceTable=finDeviceTable, finSupplyMediaInputEntry=finSupplyMediaInputEntry, finSupplyMediaInputMediaWeight=finSupplyMediaInputMediaWeight, StitchingDirTypeTC=StitchingDirTypeTC, finSupplyMediaInputSupplyIndex=finSupplyMediaInputSupplyIndex, finSupplyEntry=finSupplyEntry, FinDeviceTypeTC=FinDeviceTypeTC, finSupplyCurrentLevel=finSupplyCurrentLevel, finDeviceDescription=finDeviceDescription, finDeviceStatus=finDeviceStatus, finSupplyType=finSupplyType, finSupplyMediaInputTable=finSupplyMediaInputTable, finSupplyMediaInputMediaDimXFeedDir=finSupplyMediaInputMediaDimXFeedDir, finDeviceCurrentCapacity=finDeviceCurrentCapacity, PYSNMP_MODULE_ID=finisherMIB, StitchingAngleTypeTC=StitchingAngleTypeTC, finSupplyDeviceIndex=finSupplyDeviceIndex, finDeviceAssociatedOutputs=finDeviceAssociatedOutputs, finSupplyClass=finSupplyClass, finDeviceAttributeValueAsInteger=finDeviceAttributeValueAsInteger, finMIBGroups=finMIBGroups, finSupplyMediaInputGroup=finSupplyMediaInputGroup, finDevicePresentOnOff=finDevicePresentOnOff, finSupply=finSupply, finDeviceCapacityUnit=finDeviceCapacityUnit, finDeviceGroup=finDeviceGroup, finSupplyGroup=finSupplyGroup, finDeviceAttributeTypeIndex=finDeviceAttributeTypeIndex, finDeviceAttributeGroup=finDeviceAttributeGroup, finSupplyMediaInputMediaDimFeedDir=finSupplyMediaInputMediaDimFeedDir, FinWrappingTypeTC=FinWrappingTypeTC, finSupplyColorName=finSupplyColorName, finDeviceAttributeTable=finDeviceAttributeTable, finSupplyMediaInput=finSupplyMediaInput, finSupplyMediaInputMediaThickness=finSupplyMediaInputMediaThickness, finSupplyMediaInputStatus=finSupplyMediaInputStatus, finSupplyMediaInputType=finSupplyMediaInputType, finDeviceType=finDeviceType, finSupplyMediaInputDeviceIndex=finSupplyMediaInputDeviceIndex, finDeviceAssociatedMediaPaths=finDeviceAssociatedMediaPaths, finDeviceAttribute=finDeviceAttribute, FinSlittingTypeTC=FinSlittingTypeTC)

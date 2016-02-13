@@ -1,20 +1,21 @@
 #
 # PySNMP MIB module PTOPO-MIB (http://pysnmp.sf.net)
 # ASN.1 source http://mibs.snmplabs.com:80/asn1/PTOPO-MIB
-# Produced by pysmi-0.0.3 at Wed Jul  1 22:31:08 2015
-# On host cray platform Linux version 2.6.37.6-smp by user ilya
-# Using Python version 2.7.2 (default, Apr  2 2012, 20:32:47) 
+# Produced by pysmi-0.0.7 at Sun Feb 14 00:24:59 2016
+# On host bldfarm platform Linux version 4.1.13-100.fc21.x86_64 by user goose
+# Using Python version 3.5.0 (default, Jan  5 2016, 17:11:52) 
 #
-( Integer, ObjectIdentifier, OctetString, ) = mibBuilder.importSymbols("ASN1", "Integer", "ObjectIdentifier", "OctetString")
+( OctetString, ObjectIdentifier, Integer, ) = mibBuilder.importSymbols("ASN1", "OctetString", "ObjectIdentifier", "Integer")
 ( NamedValues, ) = mibBuilder.importSymbols("ASN1-ENUMERATION", "NamedValues")
-( ConstraintsUnion, SingleValueConstraint, ConstraintsIntersection, ValueSizeConstraint, ValueRangeConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "SingleValueConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "ValueRangeConstraint")
+( ValueRangeConstraint, ConstraintsUnion, ValueSizeConstraint, ConstraintsIntersection, SingleValueConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ValueRangeConstraint", "ConstraintsUnion", "ValueSizeConstraint", "ConstraintsIntersection", "SingleValueConstraint")
 ( PhysicalIndex, ) = mibBuilder.importSymbols("ENTITY-MIB", "PhysicalIndex")
 ( AddressFamilyNumbers, ) = mibBuilder.importSymbols("IANA-ADDRESS-FAMILY-NUMBERS-MIB", "AddressFamilyNumbers")
 ( TimeFilter, ) = mibBuilder.importSymbols("RMON2-MIB", "TimeFilter")
-( NotificationGroup, ModuleCompliance, ObjectGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ModuleCompliance", "ObjectGroup")
-( Integer32, MibScalar, MibTable, MibTableRow, MibTableColumn, NotificationType, MibIdentifier, mib_2, IpAddress, TimeTicks, Counter64, Unsigned32, ModuleIdentity, Gauge32, iso, ObjectIdentity, Bits, Counter32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Integer32", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "NotificationType", "MibIdentifier", "mib-2", "IpAddress", "TimeTicks", "Counter64", "Unsigned32", "ModuleIdentity", "Gauge32", "iso", "ObjectIdentity", "Bits", "Counter32")
-( TextualConvention, AutonomousType, TruthValue, TimeStamp, RowStatus, DisplayString, ) = mibBuilder.importSymbols("SNMPv2-TC", "TextualConvention", "AutonomousType", "TruthValue", "TimeStamp", "RowStatus", "DisplayString")
+( NotificationGroup, ObjectGroup, ModuleCompliance, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ObjectGroup", "ModuleCompliance")
+( Integer32, IpAddress, MibScalar, MibTable, MibTableRow, MibTableColumn, Counter32, NotificationType, iso, TimeTicks, Unsigned32, mib_2, Gauge32, ObjectIdentity, Bits, MibIdentifier, ModuleIdentity, Counter64, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Integer32", "IpAddress", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "Counter32", "NotificationType", "iso", "TimeTicks", "Unsigned32", "mib-2", "Gauge32", "ObjectIdentity", "Bits", "MibIdentifier", "ModuleIdentity", "Counter64")
+( TruthValue, TimeStamp, DisplayString, RowStatus, AutonomousType, TextualConvention, ) = mibBuilder.importSymbols("SNMPv2-TC", "TruthValue", "TimeStamp", "DisplayString", "RowStatus", "AutonomousType", "TextualConvention")
 ptopoMIB = ModuleIdentity((1, 3, 6, 1, 2, 1, 79)).setRevisions(("2000-09-21 00:00",))
+if mibBuilder.loadTexts: ptopoMIB.setLastUpdated('200009210000Z')
 if mibBuilder.loadTexts: ptopoMIB.setOrganization('IETF; PTOPOMIB Working Group')
 if mibBuilder.loadTexts: ptopoMIB.setContactInfo('PTOPOMIB WG Discussion:\n        ptopo@3com.com\n        Subscription:\n        majordomo@3com.com\n          msg body: [un]subscribe ptopomib\n\n        Andy Bierman\n        Cisco Systems Inc.\n        170 West Tasman Drive\n        San Jose, CA 95134\n        408-527-3711\n        abierman@cisco.com\n\n        Kendall S. Jones\n        Nortel Networks\n        4401 Great America Parkway\n        Santa Clara, CA 95054\n        408-495-7356\n        kejones@nortelnetworks.com')
 if mibBuilder.loadTexts: ptopoMIB.setDescription('The MIB module for physical topology information.')
@@ -26,21 +27,21 @@ class PtopoGenAddr(OctetString, TextualConvention):
     subtypeSpec = OctetString.subtypeSpec+ValueSizeConstraint(0,20)
 
 class PtopoChassisIdType(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4, 5,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4, 5,))
     namedValues = NamedValues(("chasIdEntPhysicalAlias", 1), ("chasIdIfAlias", 2), ("chasIdPortEntPhysicalAlias", 3), ("chasIdMacAddress", 4), ("chasIdPtopoGenAddr", 5),)
 
 class PtopoChassisId(OctetString, TextualConvention):
     subtypeSpec = OctetString.subtypeSpec+ValueSizeConstraint(1,32)
 
 class PtopoPortIdType(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4,))
     namedValues = NamedValues(("portIdIfAlias", 1), ("portIdEntPhysicalAlias", 2), ("portIdMacAddr", 3), ("portIdPtopoGenAddr", 4),)
 
 class PtopoPortId(OctetString, TextualConvention):
     subtypeSpec = OctetString.subtypeSpec+ValueSizeConstraint(1,32)
 
 class PtopoAddrSeenState(Integer32, TextualConvention):
-    subtypeSpec = Integer32.subtypeSpec+SingleValueConstraint(1, 2, 3, 4,)
+    subtypeSpec = Integer32.subtypeSpec+ConstraintsUnion(SingleValueConstraint(1, 2, 3, 4,))
     namedValues = NamedValues(("notUsed", 1), ("unknown", 2), ("oneAddr", 3), ("multiAddr", 4),)
 
 ptopoConnTable = MibTable((1, 3, 6, 1, 2, 1, 79, 1, 1, 1), )
@@ -113,4 +114,4 @@ ptopoConfigGroup = ObjectGroup((1, 3, 6, 1, 2, 1, 79, 4, 2, 3)).setObjects(*(("P
 if mibBuilder.loadTexts: ptopoConfigGroup.setDescription('The collection of objects which are used to configure the\n            PTOPO MIB implementation behavior.\n\n            This group is mandatory for agents which implement the PTOPO\n            MIB.')
 ptopoNotificationsGroup = NotificationGroup((1, 3, 6, 1, 2, 1, 79, 4, 2, 4)).setObjects(*(("PTOPO-MIB", "ptopoConfigChange"),))
 if mibBuilder.loadTexts: ptopoNotificationsGroup.setDescription('The collection of notifications used to indicate PTOPO MIB\n            data consistency and general status information.\n\n            This group is mandatory for agents which implement the PTOPO\n            MIB.')
-mibBuilder.exportSymbols("PTOPO-MIB", ptopoConnRemoteChassisType=ptopoConnRemoteChassisType, ptopoConnMultiNetSASeen=ptopoConnMultiNetSASeen, PtopoChassisId=PtopoChassisId, ptopoConnRemotePortType=ptopoConnRemotePortType, ptopoConnIndex=ptopoConnIndex, ptopoConnEntry=ptopoConnEntry, ptopoConnLocalChassis=ptopoConnLocalChassis, ptopoLastChangeTime=ptopoLastChangeTime, ptopoGeneralGroup=ptopoGeneralGroup, ptopoConnTabAgeouts=ptopoConnTabAgeouts, ptopoConnTabDrops=ptopoConnTabDrops, ptopoData=ptopoData, ptopoConnLastVerifyTime=ptopoConnLastVerifyTime, ptopoConnMultiMacSASeen=ptopoConnMultiMacSASeen, ptopoConnAgentNetAddrType=ptopoConnAgentNetAddrType, ptopoMIBNotifications=ptopoMIBNotifications, ptopoConnDiscAlgorithm=ptopoConnDiscAlgorithm, PtopoPortId=PtopoPortId, ptopoMIBTrapPrefix=ptopoMIBTrapPrefix, ptopoConnTabInserts=ptopoConnTabInserts, ptopoGroups=ptopoGroups, ptopoMIBObjects=ptopoMIBObjects, ptopoConnIsStatic=ptopoConnIsStatic, ptopoConnLocalPort=ptopoConnLocalPort, ptopoGeneral=ptopoGeneral, ptopoConfigMaxHoldTime=ptopoConfigMaxHoldTime, ptopoConfigTrapInterval=ptopoConfigTrapInterval, ptopoConnRemotePort=ptopoConnRemotePort, ptopoConnAgentNetAddr=ptopoConnAgentNetAddr, ptopoCompliance=ptopoCompliance, ptopoMIB=ptopoMIB, ptopoConfig=ptopoConfig, PtopoAddrSeenState=PtopoAddrSeenState, PtopoPortIdType=PtopoPortIdType, ptopoDiscoveryMechanisms=ptopoDiscoveryMechanisms, ptopoConformance=ptopoConformance, ptopoConnTimeMark=ptopoConnTimeMark, ptopoConnRowStatus=ptopoConnRowStatus, ptopoDiscoveryLocal=ptopoDiscoveryLocal, ptopoConnTable=ptopoConnTable, ptopoDataGroup=ptopoDataGroup, ptopoConnTabDeletes=ptopoConnTabDeletes, PtopoGenAddr=PtopoGenAddr, ptopoConnRemoteChassis=ptopoConnRemoteChassis, ptopoNotificationsGroup=ptopoNotificationsGroup, PtopoChassisIdType=PtopoChassisIdType, PYSNMP_MODULE_ID=ptopoMIB, ptopoRegistrationPoints=ptopoRegistrationPoints, ptopoCompliances=ptopoCompliances, ptopoConfigChange=ptopoConfigChange, ptopoConfigGroup=ptopoConfigGroup)
+mibBuilder.exportSymbols("PTOPO-MIB", PtopoChassisId=PtopoChassisId, ptopoConnMultiNetSASeen=ptopoConnMultiNetSASeen, ptopoGroups=ptopoGroups, ptopoConnRemotePort=ptopoConnRemotePort, ptopoConnLastVerifyTime=ptopoConnLastVerifyTime, ptopoConnTabAgeouts=ptopoConnTabAgeouts, ptopoLastChangeTime=ptopoLastChangeTime, ptopoConformance=ptopoConformance, ptopoConfigGroup=ptopoConfigGroup, PYSNMP_MODULE_ID=ptopoMIB, ptopoConnTimeMark=ptopoConnTimeMark, ptopoConnEntry=ptopoConnEntry, ptopoData=ptopoData, ptopoConnLocalPort=ptopoConnLocalPort, ptopoConnIsStatic=ptopoConnIsStatic, ptopoGeneral=ptopoGeneral, ptopoConfigMaxHoldTime=ptopoConfigMaxHoldTime, ptopoMIB=ptopoMIB, ptopoConfigChange=ptopoConfigChange, PtopoGenAddr=PtopoGenAddr, ptopoDataGroup=ptopoDataGroup, ptopoConnDiscAlgorithm=ptopoConnDiscAlgorithm, ptopoConnIndex=ptopoConnIndex, ptopoConnRemoteChassisType=ptopoConnRemoteChassisType, PtopoChassisIdType=PtopoChassisIdType, PtopoAddrSeenState=PtopoAddrSeenState, ptopoConnAgentNetAddrType=ptopoConnAgentNetAddrType, ptopoMIBNotifications=ptopoMIBNotifications, ptopoMIBObjects=ptopoMIBObjects, ptopoDiscoveryMechanisms=ptopoDiscoveryMechanisms, ptopoRegistrationPoints=ptopoRegistrationPoints, ptopoConnRowStatus=ptopoConnRowStatus, ptopoConnTabDrops=ptopoConnTabDrops, ptopoConfig=ptopoConfig, PtopoPortId=PtopoPortId, ptopoCompliance=ptopoCompliance, ptopoConnTabDeletes=ptopoConnTabDeletes, ptopoConnLocalChassis=ptopoConnLocalChassis, ptopoCompliances=ptopoCompliances, ptopoConnTable=ptopoConnTable, ptopoConnRemoteChassis=ptopoConnRemoteChassis, ptopoNotificationsGroup=ptopoNotificationsGroup, ptopoGeneralGroup=ptopoGeneralGroup, ptopoConfigTrapInterval=ptopoConfigTrapInterval, ptopoMIBTrapPrefix=ptopoMIBTrapPrefix, ptopoConnRemotePortType=ptopoConnRemotePortType, ptopoConnMultiMacSASeen=ptopoConnMultiMacSASeen, ptopoDiscoveryLocal=ptopoDiscoveryLocal, PtopoPortIdType=PtopoPortIdType, ptopoConnAgentNetAddr=ptopoConnAgentNetAddr, ptopoConnTabInserts=ptopoConnTabInserts)

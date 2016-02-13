@@ -1,18 +1,19 @@
 #
 # PySNMP MIB module NET-SNMP-EXTEND-MIB (http://pysnmp.sf.net)
-# ASN.1 source file:///usr/share/snmp/mibs/NET-SNMP-EXTEND-MIB.txt
-# Produced by pysmi-0.0.3 at Wed Jul  1 22:30:32 2015
-# On host cray platform Linux version 2.6.37.6-smp by user ilya
-# Using Python version 2.7.2 (default, Apr  2 2012, 20:32:47) 
+# ASN.1 source http://mibs.snmplabs.com:80/asn1/NET-SNMP-EXTEND-MIB
+# Produced by pysmi-0.0.7 at Sun Feb 14 00:22:34 2016
+# On host bldfarm platform Linux version 4.1.13-100.fc21.x86_64 by user goose
+# Using Python version 3.5.0 (default, Jan  5 2016, 17:11:52) 
 #
-( Integer, ObjectIdentifier, OctetString, ) = mibBuilder.importSymbols("ASN1", "Integer", "ObjectIdentifier", "OctetString")
+( Integer, OctetString, ObjectIdentifier, ) = mibBuilder.importSymbols("ASN1", "Integer", "OctetString", "ObjectIdentifier")
 ( NamedValues, ) = mibBuilder.importSymbols("ASN1-ENUMERATION", "NamedValues")
-( ConstraintsUnion, SingleValueConstraint, ConstraintsIntersection, ValueSizeConstraint, ValueRangeConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "SingleValueConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "ValueRangeConstraint")
+( SingleValueConstraint, ConstraintsIntersection, ValueRangeConstraint, ConstraintsUnion, ValueSizeConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "SingleValueConstraint", "ConstraintsIntersection", "ValueRangeConstraint", "ConstraintsUnion", "ValueSizeConstraint")
 ( nsExtensions, ) = mibBuilder.importSymbols("NET-SNMP-AGENT-MIB", "nsExtensions")
-( NotificationGroup, ModuleCompliance, ObjectGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ModuleCompliance", "ObjectGroup")
-( Integer32, MibScalar, MibTable, MibTableRow, MibTableColumn, NotificationType, MibIdentifier, IpAddress, TimeTicks, Counter64, Unsigned32, ModuleIdentity, Gauge32, iso, ObjectIdentity, Bits, Counter32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Integer32", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "NotificationType", "MibIdentifier", "IpAddress", "TimeTicks", "Counter64", "Unsigned32", "ModuleIdentity", "Gauge32", "iso", "ObjectIdentity", "Bits", "Counter32")
-( DisplayString, StorageType, RowStatus, TextualConvention, ) = mibBuilder.importSymbols("SNMPv2-TC", "DisplayString", "StorageType", "RowStatus", "TextualConvention")
+( ObjectGroup, ModuleCompliance, NotificationGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "ObjectGroup", "ModuleCompliance", "NotificationGroup")
+( MibScalar, MibTable, MibTableRow, MibTableColumn, Bits, ObjectIdentity, IpAddress, MibIdentifier, Counter64, NotificationType, TimeTicks, Gauge32, Unsigned32, Counter32, Integer32, iso, ModuleIdentity, ) = mibBuilder.importSymbols("SNMPv2-SMI", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "Bits", "ObjectIdentity", "IpAddress", "MibIdentifier", "Counter64", "NotificationType", "TimeTicks", "Gauge32", "Unsigned32", "Counter32", "Integer32", "iso", "ModuleIdentity")
+( TextualConvention, DisplayString, RowStatus, StorageType, ) = mibBuilder.importSymbols("SNMPv2-TC", "TextualConvention", "DisplayString", "RowStatus", "StorageType")
 netSnmpExtendMIB = ModuleIdentity((1, 3, 6, 1, 4, 1, 8072, 1, 3, 1)).setRevisions(("2010-03-17 00:00", "2004-05-08 00:00",))
+if mibBuilder.loadTexts: netSnmpExtendMIB.setLastUpdated('201003170000Z')
 if mibBuilder.loadTexts: netSnmpExtendMIB.setOrganization('www.net-snmp.org')
 if mibBuilder.loadTexts: netSnmpExtendMIB.setContactInfo('postal:   Wes Hardaker\n                    P.O. Box 382\n                    Davis CA  95617\n\n          email:    net-snmp-coders@lists.sourceforge.net')
 if mibBuilder.loadTexts: netSnmpExtendMIB.setDescription('Defines a framework for scripted extensions for the Net-SNMP agent.')
@@ -34,9 +35,9 @@ nsExtendInput = MibTableColumn((1, 3, 6, 1, 4, 1, 8072, 1, 3, 2, 2, 1, 4), Displ
 if mibBuilder.loadTexts: nsExtendInput.setDescription('The standard input for the command')
 nsExtendCacheTime = MibTableColumn((1, 3, 6, 1, 4, 1, 8072, 1, 3, 2, 2, 1, 5), Integer32().clone(5)).setMaxAccess("readcreate")
 if mibBuilder.loadTexts: nsExtendCacheTime.setDescription('The length of time for which the output of\n       this command will be cached.  During this time,\n       retrieving the output-related values will not\n       reinvoke the command.\n       A value of -1 indicates that the output results\n       should not be cached at all, and retrieving each\n       individual output-related value will invoke the\n       command afresh.')
-nsExtendExecType = MibTableColumn((1, 3, 6, 1, 4, 1, 8072, 1, 3, 2, 2, 1, 6), Integer32().subtype(subtypeSpec=SingleValueConstraint(1, 2,)).clone(namedValues=NamedValues(("exec", 1), ("shell", 2),)).clone('exec')).setMaxAccess("readcreate")
+nsExtendExecType = MibTableColumn((1, 3, 6, 1, 4, 1, 8072, 1, 3, 2, 2, 1, 6), Integer32().subtype(subtypeSpec=ConstraintsUnion(SingleValueConstraint(1, 2,))).clone(namedValues=NamedValues(("exec", 1), ("shell", 2),)).clone('exec')).setMaxAccess("readcreate")
 if mibBuilder.loadTexts: nsExtendExecType.setDescription('The mechanism used to invoke the command.')
-nsExtendRunType = MibTableColumn((1, 3, 6, 1, 4, 1, 8072, 1, 3, 2, 2, 1, 7), Integer32().subtype(subtypeSpec=SingleValueConstraint(1, 2, 3,)).clone(namedValues=NamedValues(("run-on-read", 1), ("run-on-set", 2), ("run-command", 3),)).clone('run-on-read')).setMaxAccess("readcreate")
+nsExtendRunType = MibTableColumn((1, 3, 6, 1, 4, 1, 8072, 1, 3, 2, 2, 1, 7), Integer32().subtype(subtypeSpec=ConstraintsUnion(SingleValueConstraint(1, 2, 3,))).clone(namedValues=NamedValues(("run-on-read", 1), ("run-on-set", 2), ("run-command", 3),)).clone('run-on-read')).setMaxAccess("readcreate")
 if mibBuilder.loadTexts: nsExtendRunType.setDescription("Used to implement 'push-button' command invocation.\n       The command for a 'run-on-read' entry will be invoked\n       whenever one of the corresponding output-related\n       instances is requested (and assuming the cached value\n       is not still current).\n       The command for a 'run-on-set' entry will only be invoked\n       on receipt of a SET assignment for this object with the\n       value 'run-command'.\n       Reading an instance of this object will always return either\n       'run-on-read' or 'run-on-set'.\n      ")
 nsExtendStorage = MibTableColumn((1, 3, 6, 1, 4, 1, 8072, 1, 3, 2, 2, 1, 20), StorageType().clone('volatile')).setMaxAccess("readcreate")
 if mibBuilder.loadTexts: nsExtendStorage.setDescription('The storage type for this conceptual row.')
@@ -68,4 +69,4 @@ nsExtendConfigGroup = ObjectGroup((1, 3, 6, 1, 4, 1, 8072, 1, 3, 3, 1)).setObjec
 if mibBuilder.loadTexts: nsExtendConfigGroup.setDescription('Objects relating to the configuration of extension commands.')
 nsExtendOutputGroup = ObjectGroup((1, 3, 6, 1, 4, 1, 8072, 1, 3, 3, 2)).setObjects(*(("NET-SNMP-EXTEND-MIB", "nsExtendOutNumLines"), ("NET-SNMP-EXTEND-MIB", "nsExtendResult"), ("NET-SNMP-EXTEND-MIB", "nsExtendOutLine"), ("NET-SNMP-EXTEND-MIB", "nsExtendOutput1Line"), ("NET-SNMP-EXTEND-MIB", "nsExtendOutputFull"),))
 if mibBuilder.loadTexts: nsExtendOutputGroup.setDescription('Objects relating to the output of extension commands.')
-mibBuilder.exportSymbols("NET-SNMP-EXTEND-MIB", nsExtendOutLine=nsExtendOutLine, nsExtendStatus=nsExtendStatus, nsExtendLineIndex=nsExtendLineIndex, nsExtendInput=nsExtendInput, nsExtendNumEntries=nsExtendNumEntries, nsExtendOutputGroup=nsExtendOutputGroup, nsExtendResult=nsExtendResult, netSnmpExtendMIB=netSnmpExtendMIB, nsExtendCommand=nsExtendCommand, nsExtendConfigGroup=nsExtendConfigGroup, nsExtendArgs=nsExtendArgs, nsExtendConfigTable=nsExtendConfigTable, nsExtendCacheTime=nsExtendCacheTime, nsExtendExecType=nsExtendExecType, nsExtendRunType=nsExtendRunType, nsExtendOutput2Entry=nsExtendOutput2Entry, nsExtendOutput1Entry=nsExtendOutput1Entry, nsExtendObjects=nsExtendObjects, nsExtendStorage=nsExtendStorage, nsExtendOutput1Line=nsExtendOutput1Line, nsExtendOutputFull=nsExtendOutputFull, nsExtendOutput2Table=nsExtendOutput2Table, nsExtendToken=nsExtendToken, nsExtendGroups=nsExtendGroups, nsExtendOutput1Table=nsExtendOutput1Table, nsExtendConfigEntry=nsExtendConfigEntry, PYSNMP_MODULE_ID=netSnmpExtendMIB, nsExtendOutNumLines=nsExtendOutNumLines)
+mibBuilder.exportSymbols("NET-SNMP-EXTEND-MIB", nsExtendNumEntries=nsExtendNumEntries, nsExtendArgs=nsExtendArgs, nsExtendCacheTime=nsExtendCacheTime, nsExtendStatus=nsExtendStatus, nsExtendOutNumLines=nsExtendOutNumLines, nsExtendLineIndex=nsExtendLineIndex, nsExtendOutput1Line=nsExtendOutput1Line, nsExtendOutput1Table=nsExtendOutput1Table, nsExtendCommand=nsExtendCommand, nsExtendGroups=nsExtendGroups, nsExtendOutput2Table=nsExtendOutput2Table, nsExtendOutLine=nsExtendOutLine, nsExtendOutputGroup=nsExtendOutputGroup, nsExtendConfigTable=nsExtendConfigTable, nsExtendConfigGroup=nsExtendConfigGroup, nsExtendExecType=nsExtendExecType, nsExtendOutputFull=nsExtendOutputFull, nsExtendConfigEntry=nsExtendConfigEntry, nsExtendOutput2Entry=nsExtendOutput2Entry, nsExtendToken=nsExtendToken, nsExtendOutput1Entry=nsExtendOutput1Entry, nsExtendRunType=nsExtendRunType, nsExtendResult=nsExtendResult, netSnmpExtendMIB=netSnmpExtendMIB, nsExtendStorage=nsExtendStorage, nsExtendObjects=nsExtendObjects, nsExtendInput=nsExtendInput, PYSNMP_MODULE_ID=netSnmpExtendMIB)

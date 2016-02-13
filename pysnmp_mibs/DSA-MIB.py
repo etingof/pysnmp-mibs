@@ -1,24 +1,25 @@
 #
 # PySNMP MIB module DSA-MIB (http://pysnmp.sf.net)
 # ASN.1 source http://mibs.snmplabs.com:80/asn1/DSA-MIB
-# Produced by pysmi-0.0.3 at Wed Jul  1 22:27:36 2015
-# On host cray platform Linux version 2.6.37.6-smp by user ilya
-# Using Python version 2.7.2 (default, Apr  2 2012, 20:32:47) 
+# Produced by pysmi-0.0.7 at Sun Feb 14 00:11:07 2016
+# On host bldfarm platform Linux version 4.1.13-100.fc21.x86_64 by user goose
+# Using Python version 3.5.0 (default, Jan  5 2016, 17:11:52) 
 #
 ( Integer, ObjectIdentifier, OctetString, ) = mibBuilder.importSymbols("ASN1", "Integer", "ObjectIdentifier", "OctetString")
 ( NamedValues, ) = mibBuilder.importSymbols("ASN1-ENUMERATION", "NamedValues")
-( ConstraintsUnion, SingleValueConstraint, ConstraintsIntersection, ValueSizeConstraint, ValueRangeConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "SingleValueConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "ValueRangeConstraint")
-( applIndex, DistinguishedName, ) = mibBuilder.importSymbols("NETWORK-SERVICES-MIB", "applIndex", "DistinguishedName")
+( SingleValueConstraint, ValueSizeConstraint, ValueRangeConstraint, ConstraintsIntersection, ConstraintsUnion, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "SingleValueConstraint", "ValueSizeConstraint", "ValueRangeConstraint", "ConstraintsIntersection", "ConstraintsUnion")
+( DistinguishedName, applIndex, ) = mibBuilder.importSymbols("NETWORK-SERVICES-MIB", "DistinguishedName", "applIndex")
 ( NotificationGroup, ModuleCompliance, ObjectGroup, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ModuleCompliance", "ObjectGroup")
-( Integer32, MibScalar, MibTable, MibTableRow, MibTableColumn, NotificationType, MibIdentifier, mib_2, IpAddress, TimeTicks, Counter64, Unsigned32, ModuleIdentity, Gauge32, iso, ObjectIdentity, Bits, Counter32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Integer32", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "NotificationType", "MibIdentifier", "mib-2", "IpAddress", "TimeTicks", "Counter64", "Unsigned32", "ModuleIdentity", "Gauge32", "iso", "ObjectIdentity", "Bits", "Counter32")
+( MibScalar, MibTable, MibTableRow, MibTableColumn, Unsigned32, Gauge32, iso, NotificationType, Bits, Counter32, mib_2, ModuleIdentity, Integer32, ObjectIdentity, IpAddress, TimeTicks, MibIdentifier, Counter64, ) = mibBuilder.importSymbols("SNMPv2-SMI", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "Unsigned32", "Gauge32", "iso", "NotificationType", "Bits", "Counter32", "mib-2", "ModuleIdentity", "Integer32", "ObjectIdentity", "IpAddress", "TimeTicks", "MibIdentifier", "Counter64")
 ( DisplayString, TimeStamp, TextualConvention, ) = mibBuilder.importSymbols("SNMPv2-TC", "DisplayString", "TimeStamp", "TextualConvention")
 dsaMIB = ModuleIdentity((1, 3, 6, 1, 2, 1, 29))
+if mibBuilder.loadTexts: dsaMIB.setLastUpdated('9311250000Z')
 if mibBuilder.loadTexts: dsaMIB.setOrganization('IETF Mail and Directory Management Working\n                         Group')
 if mibBuilder.loadTexts: dsaMIB.setContactInfo('        Glenn Mansfield\n\n              Postal: AIC Systems Laboratory\n                      6-6-3, Minami Yoshinari\n                      Aoba-ku, Sendai, 989-32\n                      JP\n\n              Tel:    +81 22 279 3310\n              Fax:    +81 22 279 3640\n              E-Mail: glenn@aic.co.jp')
 if mibBuilder.loadTexts: dsaMIB.setDescription(' The MIB module for monitoring Directory System Agents.')
 dsaOpsTable = MibTable((1, 3, 6, 1, 2, 1, 29, 1), )
 if mibBuilder.loadTexts: dsaOpsTable.setDescription(' The table holding information related to the\n                DSA operations.')
-dsaOpsEntry = MibTableRow((1, 3, 6, 1, 2, 1, 29, 1, 1), ).setIndexNames((0, "DSA-MIB", "applIndex"))
+dsaOpsEntry = MibTableRow((1, 3, 6, 1, 2, 1, 29, 1, 1), ).setIndexNames((0, "NETWORK-SERVICES-MIB", "applIndex"))
 if mibBuilder.loadTexts: dsaOpsEntry.setDescription(' Entry containing operations related statistics\n                for a DSA.')
 dsaAnonymousBinds = MibTableColumn((1, 3, 6, 1, 2, 1, 29, 1, 1, 1), Counter32()).setMaxAccess("readonly")
 if mibBuilder.loadTexts: dsaAnonymousBinds.setDescription(' Number of anonymous  binds to this DSA from DUAs\n                since application start.')
@@ -62,7 +63,7 @@ dsaErrors = MibTableColumn((1, 3, 6, 1, 2, 1, 29, 1, 1, 20), Counter32()).setMax
 if mibBuilder.loadTexts: dsaErrors.setDescription(' Number of operations that could not be serviced\n                due to errors other than security errors, and\n                referrals.\n                A partially serviced operation will not be counted\n                as an error.\n                The errors include NameErrors, UpdateErrors, Attribute\n                errors and ServiceErrors.')
 dsaEntriesTable = MibTable((1, 3, 6, 1, 2, 1, 29, 2), )
 if mibBuilder.loadTexts: dsaEntriesTable.setDescription(' The table holding information related to the\n\n                entry statistics and cache performance of the DSAs.')
-dsaEntriesEntry = MibTableRow((1, 3, 6, 1, 2, 1, 29, 2, 1), ).setIndexNames((0, "DSA-MIB", "applIndex"))
+dsaEntriesEntry = MibTableRow((1, 3, 6, 1, 2, 1, 29, 2, 1), ).setIndexNames((0, "NETWORK-SERVICES-MIB", "applIndex"))
 if mibBuilder.loadTexts: dsaEntriesEntry.setDescription(' Entry containing statistics pertaining to entries\n                held by a DSA.')
 dsaMasterEntries = MibTableColumn((1, 3, 6, 1, 2, 1, 29, 2, 1, 1), Gauge32()).setMaxAccess("readonly")
 if mibBuilder.loadTexts: dsaMasterEntries.setDescription(' Number of entries mastered in the DSA.')
@@ -76,7 +77,7 @@ dsaSlaveHits = MibTableColumn((1, 3, 6, 1, 2, 1, 29, 2, 1, 5), Counter32()).setM
 if mibBuilder.loadTexts: dsaSlaveHits.setDescription(' Number of operations that were serviced from\n                the locally held object replications [ shadow\n                entries] since application startup.')
 dsaIntTable = MibTable((1, 3, 6, 1, 2, 1, 29, 3), )
 if mibBuilder.loadTexts: dsaIntTable.setDescription(' Each row of this table contains some details\n                      related to the history of the interaction\n                      of the monitored DSAs with their respective\n                      peer DSAs.')
-dsaIntEntry = MibTableRow((1, 3, 6, 1, 2, 1, 29, 3, 1), ).setIndexNames((0, "DSA-MIB", "applIndex"), (0, "DSA-MIB", "dsaIntIndex"))
+dsaIntEntry = MibTableRow((1, 3, 6, 1, 2, 1, 29, 3, 1), ).setIndexNames((0, "NETWORK-SERVICES-MIB", "applIndex"), (0, "DSA-MIB", "dsaIntIndex"))
 if mibBuilder.loadTexts: dsaIntEntry.setDescription(' Entry containing interaction details of a DSA\n                      with a peer DSA.')
 dsaIntIndex = MibTableColumn((1, 3, 6, 1, 2, 1, 29, 3, 1, 1), Integer32().subtype(subtypeSpec=ValueRangeConstraint(1,2147483647)))
 if mibBuilder.loadTexts: dsaIntIndex.setDescription(' Together with applIndex it forms the unique key to\n                identify the conceptual row which contains useful info\n                on the (attempted) interaction between the DSA (referred\n                to by applIndex) and a peer DSA.')
@@ -109,4 +110,4 @@ dsaEntryGroup = ObjectGroup((1, 3, 6, 1, 2, 1, 29, 4, 1, 2)).setObjects(*(("DSA-
 if mibBuilder.loadTexts: dsaEntryGroup.setDescription(' A collection of objects for monitoring the DSA\n                      entry statistics and cache performance.')
 dsaIntGroup = ObjectGroup((1, 3, 6, 1, 2, 1, 29, 4, 1, 3)).setObjects(*(("DSA-MIB", "dsaName"), ("DSA-MIB", "dsaTimeOfCreation"), ("DSA-MIB", "dsaTimeOfLastAttempt"), ("DSA-MIB", "dsaTimeOfLastSuccess"), ("DSA-MIB", "dsaFailuresSinceLastSuccess"), ("DSA-MIB", "dsaFailures"), ("DSA-MIB", "dsaSuccesses"),))
 if mibBuilder.loadTexts: dsaIntGroup.setDescription(" A collection of objects for monitoring the DSA's\n                      interaction with peer DSAs.")
-mibBuilder.exportSymbols("DSA-MIB", dsaGroups=dsaGroups, dsaModifyRDNOps=dsaModifyRDNOps, dsaUnauthBinds=dsaUnauthBinds, dsaFailuresSinceLastSuccess=dsaFailuresSinceLastSuccess, dsaWholeTreeSearchOps=dsaWholeTreeSearchOps, dsaAddEntryOps=dsaAddEntryOps, dsaFailures=dsaFailures, dsaSimpleAuthBinds=dsaSimpleAuthBinds, dsaCompliances=dsaCompliances, dsaRemoveEntryOps=dsaRemoveEntryOps, dsaEntryGroup=dsaEntryGroup, dsaTimeOfLastSuccess=dsaTimeOfLastSuccess, dsaIntCompliance=dsaIntCompliance, dsaSlaveHits=dsaSlaveHits, dsaErrors=dsaErrors, dsaOpsGroup=dsaOpsGroup, dsaCacheHits=dsaCacheHits, dsaStrongAuthBinds=dsaStrongAuthBinds, dsaIntGroup=dsaIntGroup, dsaEntriesEntry=dsaEntriesEntry, dsaCopyEntries=dsaCopyEntries, dsaChainings=dsaChainings, dsaIntTable=dsaIntTable, dsaReferrals=dsaReferrals, dsaMIB=dsaMIB, dsaEntriesTable=dsaEntriesTable, dsaOpsTable=dsaOpsTable, dsaTimeOfLastAttempt=dsaTimeOfLastAttempt, dsaListOps=dsaListOps, dsaSecurityErrors=dsaSecurityErrors, dsaOpsCompliance=dsaOpsCompliance, dsaOpsEntry=dsaOpsEntry, dsaIntEntry=dsaIntEntry, dsaInOps=dsaInOps, dsaBindSecurityErrors=dsaBindSecurityErrors, dsaOneLevelSearchOps=dsaOneLevelSearchOps, dsaModifyEntryOps=dsaModifyEntryOps, dsaConformance=dsaConformance, dsaTimeOfCreation=dsaTimeOfCreation, dsaCompareOps=dsaCompareOps, dsaReadOps=dsaReadOps, dsaMasterEntries=dsaMasterEntries, dsaSuccesses=dsaSuccesses, dsaAnonymousBinds=dsaAnonymousBinds, dsaIntIndex=dsaIntIndex, PYSNMP_MODULE_ID=dsaMIB, dsaSearchOps=dsaSearchOps, dsaName=dsaName, dsaCacheEntries=dsaCacheEntries, dsaEntryCompliance=dsaEntryCompliance)
+mibBuilder.exportSymbols("DSA-MIB", dsaErrors=dsaErrors, dsaOpsGroup=dsaOpsGroup, dsaTimeOfLastSuccess=dsaTimeOfLastSuccess, dsaGroups=dsaGroups, dsaWholeTreeSearchOps=dsaWholeTreeSearchOps, dsaConformance=dsaConformance, dsaOneLevelSearchOps=dsaOneLevelSearchOps, dsaBindSecurityErrors=dsaBindSecurityErrors, dsaOpsEntry=dsaOpsEntry, dsaSuccesses=dsaSuccesses, dsaOpsCompliance=dsaOpsCompliance, dsaSearchOps=dsaSearchOps, dsaMasterEntries=dsaMasterEntries, dsaTimeOfLastAttempt=dsaTimeOfLastAttempt, dsaUnauthBinds=dsaUnauthBinds, dsaEntryCompliance=dsaEntryCompliance, dsaFailuresSinceLastSuccess=dsaFailuresSinceLastSuccess, dsaMIB=dsaMIB, dsaSecurityErrors=dsaSecurityErrors, dsaModifyEntryOps=dsaModifyEntryOps, dsaIntCompliance=dsaIntCompliance, dsaName=dsaName, dsaOpsTable=dsaOpsTable, dsaIntIndex=dsaIntIndex, dsaTimeOfCreation=dsaTimeOfCreation, dsaChainings=dsaChainings, dsaInOps=dsaInOps, dsaCacheEntries=dsaCacheEntries, dsaEntryGroup=dsaEntryGroup, dsaEntriesEntry=dsaEntriesEntry, dsaStrongAuthBinds=dsaStrongAuthBinds, dsaIntEntry=dsaIntEntry, dsaSimpleAuthBinds=dsaSimpleAuthBinds, dsaReadOps=dsaReadOps, dsaRemoveEntryOps=dsaRemoveEntryOps, dsaModifyRDNOps=dsaModifyRDNOps, dsaFailures=dsaFailures, dsaListOps=dsaListOps, dsaCacheHits=dsaCacheHits, dsaIntTable=dsaIntTable, dsaEntriesTable=dsaEntriesTable, PYSNMP_MODULE_ID=dsaMIB, dsaCompliances=dsaCompliances, dsaCompareOps=dsaCompareOps, dsaCopyEntries=dsaCopyEntries, dsaSlaveHits=dsaSlaveHits, dsaAnonymousBinds=dsaAnonymousBinds, dsaIntGroup=dsaIntGroup, dsaReferrals=dsaReferrals, dsaAddEntryOps=dsaAddEntryOps)

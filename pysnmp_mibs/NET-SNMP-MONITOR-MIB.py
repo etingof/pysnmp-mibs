@@ -1,18 +1,19 @@
 #
 # PySNMP MIB module NET-SNMP-MONITOR-MIB (http://pysnmp.sf.net)
 # ASN.1 source http://mibs.snmplabs.com:80/asn1/NET-SNMP-MONITOR-MIB
-# Produced by pysmi-0.0.3 at Wed Jul  1 22:30:33 2015
-# On host cray platform Linux version 2.6.37.6-smp by user ilya
-# Using Python version 2.7.2 (default, Apr  2 2012, 20:32:47) 
+# Produced by pysmi-0.0.7 at Sun Feb 14 00:22:39 2016
+# On host bldfarm platform Linux version 4.1.13-100.fc21.x86_64 by user goose
+# Using Python version 3.5.0 (default, Jan  5 2016, 17:11:52) 
 #
-( Integer, ObjectIdentifier, OctetString, ) = mibBuilder.importSymbols("ASN1", "Integer", "ObjectIdentifier", "OctetString")
+( ObjectIdentifier, OctetString, Integer, ) = mibBuilder.importSymbols("ASN1", "ObjectIdentifier", "OctetString", "Integer")
 ( NamedValues, ) = mibBuilder.importSymbols("ASN1-ENUMERATION", "NamedValues")
-( ConstraintsUnion, SingleValueConstraint, ConstraintsIntersection, ValueSizeConstraint, ValueRangeConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ConstraintsUnion", "SingleValueConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "ValueRangeConstraint")
-( netSnmpObjects, netSnmpModuleIDs, ) = mibBuilder.importSymbols("NET-SNMP-MIB", "netSnmpObjects", "netSnmpModuleIDs")
+( ValueRangeConstraint, ConstraintsIntersection, ValueSizeConstraint, ConstraintsUnion, SingleValueConstraint, ) = mibBuilder.importSymbols("ASN1-REFINEMENT", "ValueRangeConstraint", "ConstraintsIntersection", "ValueSizeConstraint", "ConstraintsUnion", "SingleValueConstraint")
+( netSnmpModuleIDs, netSnmpObjects, ) = mibBuilder.importSymbols("NET-SNMP-MIB", "netSnmpModuleIDs", "netSnmpObjects")
 ( NotificationGroup, ModuleCompliance, ) = mibBuilder.importSymbols("SNMPv2-CONF", "NotificationGroup", "ModuleCompliance")
-( Integer32, MibScalar, MibTable, MibTableRow, MibTableColumn, NotificationType, MibIdentifier, IpAddress, TimeTicks, Counter64, Unsigned32, ModuleIdentity, Gauge32, iso, ObjectIdentity, Bits, Counter32, ) = mibBuilder.importSymbols("SNMPv2-SMI", "Integer32", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "NotificationType", "MibIdentifier", "IpAddress", "TimeTicks", "Counter64", "Unsigned32", "ModuleIdentity", "Gauge32", "iso", "ObjectIdentity", "Bits", "Counter32")
-( DisplayString, TextualConvention, ) = mibBuilder.importSymbols("SNMPv2-TC", "DisplayString", "TextualConvention")
+( MibScalar, MibTable, MibTableRow, MibTableColumn, Counter64, NotificationType, Unsigned32, Counter32, ObjectIdentity, Integer32, Bits, TimeTicks, Gauge32, IpAddress, ModuleIdentity, iso, MibIdentifier, ) = mibBuilder.importSymbols("SNMPv2-SMI", "MibScalar", "MibTable", "MibTableRow", "MibTableColumn", "Counter64", "NotificationType", "Unsigned32", "Counter32", "ObjectIdentity", "Integer32", "Bits", "TimeTicks", "Gauge32", "IpAddress", "ModuleIdentity", "iso", "MibIdentifier")
+( TextualConvention, DisplayString, ) = mibBuilder.importSymbols("SNMPv2-TC", "TextualConvention", "DisplayString")
 netSnmpMonitorMIB = ModuleIdentity((1, 3, 6, 1, 4, 1, 8072, 3, 1, 3)).setRevisions(("2002-02-09 00:00",))
+if mibBuilder.loadTexts: netSnmpMonitorMIB.setLastUpdated('200202090000Z')
 if mibBuilder.loadTexts: netSnmpMonitorMIB.setOrganization('www.net-snmp.org')
 if mibBuilder.loadTexts: netSnmpMonitorMIB.setContactInfo('postal:   Wes Hardaker\n                    P.O. Box 382\n                    Davis CA  95617\n\n          email:    net-snmp-coders@lists.sourceforge.net')
 if mibBuilder.loadTexts: netSnmpMonitorMIB.setDescription('Configured elements of the system to monitor\n\t (XXX - ugh! - need a better description!)')
@@ -20,4 +21,4 @@ nsProcess = MibIdentifier((1, 3, 6, 1, 4, 1, 8072, 1, 21))
 nsDisk = MibIdentifier((1, 3, 6, 1, 4, 1, 8072, 1, 22))
 nsFile = MibIdentifier((1, 3, 6, 1, 4, 1, 8072, 1, 23))
 nsLog = MibIdentifier((1, 3, 6, 1, 4, 1, 8072, 1, 24))
-mibBuilder.exportSymbols("NET-SNMP-MONITOR-MIB", nsLog=nsLog, nsFile=nsFile, nsProcess=nsProcess, nsDisk=nsDisk, netSnmpMonitorMIB=netSnmpMonitorMIB, PYSNMP_MODULE_ID=netSnmpMonitorMIB)
+mibBuilder.exportSymbols("NET-SNMP-MONITOR-MIB", nsProcess=nsProcess, nsFile=nsFile, PYSNMP_MODULE_ID=netSnmpMonitorMIB, nsDisk=nsDisk, netSnmpMonitorMIB=netSnmpMonitorMIB, nsLog=nsLog)
