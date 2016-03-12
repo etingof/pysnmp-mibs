@@ -14,4 +14,4 @@ install:
   - pip install pysnmp
   - python setup.py install
 script:
-  - python tests/test_load_all
+  - python tests/test_load_all.py
